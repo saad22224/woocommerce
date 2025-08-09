@@ -192,7 +192,7 @@
         /* About Us Section */
         .about-us {
             padding: 100px 0;
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            background: #335;
             position: relative;
             overflow: hidden;
         }

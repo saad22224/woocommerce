@@ -19,7 +19,7 @@ body {
 
 /* Navigation Styles */
 .navbar {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #333;
     padding: 1rem 0;
     box-shadow: 0 4px 20px rgba(0,0,0,0.1);
     position: sticky;
@@ -134,7 +134,7 @@ body {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #335;
     padding: 4rem 0;
     color: white;
     display: flex;
