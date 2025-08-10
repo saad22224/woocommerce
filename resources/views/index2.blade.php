@@ -497,87 +497,359 @@
     <section class="featured-products">
         <div class="container">
             <h2 class="section-title">أحدث المنتجات</h2>
-            <div class="products-grid" id="products-grid">
-                <!-- Products will be loaded here via JavaScript -->
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
-                            alt="${product.title}">
-                        <button class="add-to-cart" onclick="addToCart(${product.id})">إضافة للسلة</button>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">
-                            <a href="product-detail.html?id=${product.id}" style="text-decoration: none; color: inherit;">
-                                test
-                            </a>
-                        </h3>
-                        <div class="product-price">
-                            100 ر.س
-                            {{-- ${product.oldPrice ? `<span style="text-decoration: line-through; color: #999; margin-right: 10px;">${product.oldPrice} ر.س</span>` : ''} --}}
+
+            <!-- Swiper -->
+            <div class="swiper mySwiper" id="products-swiper">
+                <div class="swiper-wrapper">
+
+                    <div class="swiper-slide">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
+                                    alt="test">
+                                <button class="add-to-cart">إضافة للسلة</button>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">
+                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
+                                </h3>
+                                <div class="product-price">100 ر.س</div>
+                                <p class="product-description">test</p>
+                            </div>
                         </div>
-                        <p class="product-description">test</p>
                     </div>
-                </div>
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
-                            alt="${product.title}">
-                        <button class="add-to-cart" onclick="addToCart(${product.id})">إضافة للسلة</button>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">
-                            <a href="product-detail.html?id=${product.id}" style="text-decoration: none; color: inherit;">
-                                test
-                            </a>
-                        </h3>
-                        <div class="product-price">
-                            100 ر.س
-                            {{-- ${product.oldPrice ? `<span style="text-decoration: line-through; color: #999; margin-right: 10px;">${product.oldPrice} ر.س</span>` : ''} --}}
+
+                    <!-- كرر باقي المنتجات هنا بنفس الشكل -->
+                    <div class="swiper-slide">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
+                                    alt="test">
+                                <button class="add-to-cart">إضافة للسلة</button>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">
+                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
+                                </h3>
+                                <div class="product-price">100 ر.س</div>
+                                <p class="product-description">test</p>
+                            </div>
                         </div>
-                        <p class="product-description">test</p>
                     </div>
-                </div>
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
-                            alt="${product.title}">
-                        <button class="add-to-cart" onclick="addToCart(${product.id})">إضافة للسلة</button>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">
-                            <a href="product-detail.html?id=${product.id}" style="text-decoration: none; color: inherit;">
-                                test
-                            </a>
-                        </h3>
-                        <div class="product-price">
-                            100 ر.س
-                            {{-- ${product.oldPrice ? `<span style="text-decoration: line-through; color: #999; margin-right: 10px;">${product.oldPrice} ر.س</span>` : ''} --}}
+                    <div class="swiper-slide">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
+                                    alt="test">
+                                <button class="add-to-cart">إضافة للسلة</button>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">
+                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
+                                </h3>
+                                <div class="product-price">100 ر.س</div>
+                                <p class="product-description">test</p>
+                            </div>
                         </div>
-                        <p class="product-description">test</p>
                     </div>
-                </div>
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
-                            alt="${product.title}">
-                        <button class="add-to-cart" onclick="addToCart(${product.id})">إضافة للسلة</button>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">
-                            <a href="product-detail.html?id=${product.id}" style="text-decoration: none; color: inherit;">
-                                test
-                            </a>
-                        </h3>
-                        <div class="product-price">
-                            100 ر.س
-                            {{-- ${product.oldPrice ? `<span style="text-decoration: line-through; color: #999; margin-right: 10px;">${product.oldPrice} ر.س</span>` : ''} --}}
+                    <div class="swiper-slide">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
+                                    alt="test">
+                                <button class="add-to-cart">إضافة للسلة</button>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">
+                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
+                                </h3>
+                                <div class="product-price">100 ر.س</div>
+                                <p class="product-description">test</p>
+                            </div>
                         </div>
-                        <p class="product-description">test</p>
                     </div>
+                    <div class="swiper-slide">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
+                                    alt="test">
+                                <button class="add-to-cart">إضافة للسلة</button>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">
+                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
+                                </h3>
+                                <div class="product-price">100 ر.س</div>
+                                <p class="product-description">test</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
+                                    alt="test">
+                                <button class="add-to-cart">إضافة للسلة</button>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">
+                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
+                                </h3>
+                                <div class="product-price">100 ر.س</div>
+                                <p class="product-description">test</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
+                                    alt="test">
+                                <button class="add-to-cart">إضافة للسلة</button>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">
+                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
+                                </h3>
+                                <div class="product-price">100 ر.س</div>
+                                <p class="product-description">test</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
+                                    alt="test">
+                                <button class="add-to-cart">إضافة للسلة</button>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">
+                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
+                                </h3>
+                                <div class="product-price">100 ر.س</div>
+                                <p class="product-description">test</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
+                                    alt="test">
+                                <button class="add-to-cart">إضافة للسلة</button>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">
+                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
+                                </h3>
+                                <div class="product-price">100 ر.س</div>
+                                <p class="product-description">test</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
+                                    alt="test">
+                                <button class="add-to-cart">إضافة للسلة</button>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">
+                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
+                                </h3>
+                                <div class="product-price">100 ر.س</div>
+                                <p class="product-description">test</p>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
+
         </div>
     </section>
+
+
+    <section class="featured-products" style="background-color: #f8f9fa">
+        <div class="container">
+            <h2 class="section-title">الأكثر مبيعا</h2>
+
+            <!-- Swiper -->
+            <div class="swiper mySwiper" id="products-swiper">
+                <div class="swiper-wrapper">
+
+                    <div class="swiper-slide">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
+                                    alt="test">
+                                <button class="add-to-cart">إضافة للسلة</button>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">
+                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
+                                </h3>
+                                <div class="product-price">100 ر.س</div>
+                                <p class="product-description">test</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- كرر باقي المنتجات هنا بنفس الشكل -->
+                    <div class="swiper-slide">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
+                                    alt="test">
+                                <button class="add-to-cart">إضافة للسلة</button>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">
+                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
+                                </h3>
+                                <div class="product-price">100 ر.س</div>
+                                <p class="product-description">test</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
+                                    alt="test">
+                                <button class="add-to-cart">إضافة للسلة</button>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">
+                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
+                                </h3>
+                                <div class="product-price">100 ر.س</div>
+                                <p class="product-description">test</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
+                                    alt="test">
+                                <button class="add-to-cart">إضافة للسلة</button>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">
+                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
+                                </h3>
+                                <div class="product-price">100 ر.س</div>
+                                <p class="product-description">test</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
+                                    alt="test">
+                                <button class="add-to-cart">إضافة للسلة</button>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">
+                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
+                                </h3>
+                                <div class="product-price">100 ر.س</div>
+                                <p class="product-description">test</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
+                                    alt="test">
+                                <button class="add-to-cart">إضافة للسلة</button>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">
+                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
+                                </h3>
+                                <div class="product-price">100 ر.س</div>
+                                <p class="product-description">test</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
+                                    alt="test">
+                                <button class="add-to-cart">إضافة للسلة</button>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">
+                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
+                                </h3>
+                                <div class="product-price">100 ر.س</div>
+                                <p class="product-description">test</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
+                                    alt="test">
+                                <button class="add-to-cart">إضافة للسلة</button>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">
+                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
+                                </h3>
+                                <div class="product-price">100 ر.س</div>
+                                <p class="product-description">test</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
+                                    alt="test">
+                                <button class="add-to-cart">إضافة للسلة</button>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">
+                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
+                                </h3>
+                                <div class="product-price">100 ر.س</div>
+                                <p class="product-description">test</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
+                                    alt="test">
+                                <button class="add-to-cart">إضافة للسلة</button>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">
+                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
+                                </h3>
+                                <div class="product-price">100 ر.س</div>
+                                <p class="product-description">test</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
 
     <!-- Shopping Cart Sidebar -->
     <div class="cart-sidebar" id="cart-sidebar">
