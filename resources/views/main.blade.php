@@ -12,16 +12,28 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{{ asset('styles.css') }}">
 
 </head>
+
+<style>
+    .nav-logo img {
+    height: 90px; /* ارتفاع ثابت */
+    width: auto; /* يحافظ على النسبة */
+    object-fit: contain; /* يضمن أن الصورة لا تتمدد أو تتقطع */
+    display: block;
+    border-radius: 10px;
+}
+</style>
 
 <body>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <h2>متجري 🛍️</h2>
+                <a href="{{ route('home') }}">
+              <img src="{{ asset('assets/logo.jpeg') }}" alt="">
+              </a>
             </div>
 
             <div class="nav-menu" id="nav-menu">
@@ -133,7 +145,7 @@
             <div class="cart-total">
                 <strong>الإجمالي: <span id="cart-total">0</span> ر.س</strong>
             </div>
-            <button class="checkout-btn" onclick="location.href='checkout.html'">إتمام الشراء</button>
+            <button class="checkout-btn" onclick="location.href='/checkout'">إتمام الشراء</button>
         </div>
     </div>
 
@@ -217,7 +229,7 @@
     </footer>
 
 
-    <script src="script.js"></script>
+    <script src="{{ asset('script.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>

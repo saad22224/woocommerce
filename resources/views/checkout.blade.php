@@ -1,47 +1,6 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إتمام الشراء - متجري الإلكتروني</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <h2>متجري 🛍️</h2>
-            </div>
-            
-            <div class="nav-menu" id="nav-menu">
-                <a href="index.html" class="nav-link">الرئيسية</a>
-                <a href="products.html" class="nav-link">المنتجات</a>
-                <div class="dropdown">
-                    <a href="#" class="nav-link">الأقسام ▼</a>
-                    <div class="dropdown-content">
-                        <a href="products.html?category=electronics">إلكترونيات</a>
-                        <a href="products.html?category=fashion">أزياء</a>
-                        <a href="products.html?category=home">منزل</a>
-                        <a href="products.html?category=books">كتب</a>
-                    </div>
-                </div>
-                <a href="contact.html" class="nav-link">تواصل معنا</a>
-            </div>
 
-            <div class="nav-actions">
-                <button class="cart-btn" id="cart-btn">
-                    🛒 <span id="cart-count">0</span>
-                </button>
-                <div class="hamburger" id="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-        </div>
-    </nav>
-
+@extends('main')
+@section('content')
     <!-- Checkout Steps -->
     <section class="checkout-steps">
         <div class="container">
@@ -224,52 +183,4 @@
         </div>
     </section>
 
-    <!-- Shopping Cart Sidebar -->
-    <div class="cart-sidebar" id="cart-sidebar">
-        <div class="cart-header">
-            <h3>سلة التسوق</h3>
-            <button class="close-cart" id="close-cart">×</button>
-        </div>
-        <div class="cart-items" id="cart-items">
-            <p class="empty-cart">السلة فارغة</p>
-        </div>
-        <div class="cart-footer">
-            <div class="cart-total">
-                <strong>الإجمالي: <span id="cart-total">0</span> ر.س</strong>
-            </div>
-            <button class="checkout-btn" onclick="location.href='checkout.html'">إتمام الشراء</button>
-        </div>
-    </div>
-
-    <!-- Cart Overlay -->
-    <div class="cart-overlay" id="cart-overlay"></div>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>متجري</h4>
-                    <p>أفضل متجر إلكتروني للتسوق الآمن والموثوق</p>
-                </div>
-                <div class="footer-section">
-                    <h4>روابط سريعة</h4>
-                    <a href="index.html">الرئيسية</a>
-                    <a href="products.html">المنتجات</a>
-                    <a href="contact.html">تواصل معنا</a>
-                </div>
-                <div class="footer-section">
-                    <h4>الدعم</h4>
-                    <p>📧 support@mystore.com</p>
-                    <p>📱 +966501234567</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 متجري الإلكتروني. جميع الحقوق محفوظة.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-</html>
+@endsection

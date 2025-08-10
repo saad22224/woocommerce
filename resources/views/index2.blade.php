@@ -511,7 +511,7 @@
                             </div>
                             <div class="product-info">
                                 <h3 class="product-title">
-                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
+                                    <a href="{{ route('product_details') }}" style="text-decoration: none; color: inherit;">test</a>
                                 </h3>
                                 <div class="product-price">100 ر.س</div>
                                 <p class="product-description">test</p>
