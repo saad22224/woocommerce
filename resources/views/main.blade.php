@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
@@ -25,7 +26,7 @@
 
             <div class="nav-menu" id="nav-menu">
                 <a href="index.html" class="nav-link active">الرئيسية</a>
-                <a href="products.html" class="nav-link">المنتجات</a>
+                <a href="{{ route('products') }}" class="nav-link">المنتجات</a>
                 <div class="dropdown">
                     <a href="#" class="nav-link">الأقسام ▼</a>
                     <div class="dropdown-content">
@@ -52,7 +53,7 @@
                             class="nav-link">تسجيل الخروج</button>
                     </form>
                 @else
-                    <a href="{{ route('login') }}" class="nav-link">تسجيل حساب</a> <a href="{{ route('login') }}"
+                     <a href="{{ route('login') }}"
                         class="nav-link">تسجيل الدخول</a>
                 @endauth
             </div>
@@ -188,39 +189,38 @@
 
     <script src="script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script>
-        const swiper = new Swiper(".mySwiper", {
-            slidesPerView: 4,
-            spaceBetween: 20,
-            loop: true,
-            autoplay: {
-                delay: 2000,
-                disableOnInteraction: false,
-            },
-            breakpoints: {
-                0: {
-                    slidesPerView: 1
-                },
-                576: {
-                    slidesPerView: 2
-                },
-                768: {
-                    slidesPerView: 3
-                },
-                1024: {
-                    slidesPerView: 4
-                }
-            }
-        });
 
-        // إيقاف التشغيل التلقائي عند الـ hover
-        const swiperEl = document.getElementById('products-swiper');
-        swiperEl.addEventListener('mouseenter', () => {
-            swiper.autoplay.stop();
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+  const swiper = new Swiper(".mySwiper", {
+    slidesPerView: 4,
+    spaceBetween: 20,
+    loop: true,
+    autoplay: {
+      delay: 2000,
+      disableOnInteraction: false,
+    },
+    breakpoints: {
+      0: { slidesPerView: 1 },
+      576: { slidesPerView: 2 },
+      768: { slidesPerView: 3 },
+      1024: { slidesPerView: 4 },
+    },
+    on: {
+      init: function () {
+        this.el.addEventListener('mouseenter', () => {
+          this.autoplay.stop();
+          console.log('autoplay stopped on hover');
         });
-        swiperEl.addEventListener('mouseleave', () => {
-            swiper.autoplay.start();
+        this.el.addEventListener('mouseleave', () => {
+          this.autoplay.start();
+          console.log('autoplay started on leave');
         });
+      },
+    },
+  });
+});
+
     </script>
 </body>
 
