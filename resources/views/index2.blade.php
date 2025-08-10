@@ -852,22 +852,5 @@
 
 
     <!-- Shopping Cart Sidebar -->
-    <div class="cart-sidebar" id="cart-sidebar">
-        <div class="cart-header">
-            <h3>سلة التسوق</h3>
-            <button class="close-cart" id="close-cart">×</button>
-        </div>
-        <div class="cart-items" id="cart-items">
-            <p class="empty-cart">السلة فارغة</p>
-        </div>
-        <div class="cart-footer">
-            <div class="cart-total">
-                <strong>الإجمالي: <span id="cart-total">0</span> ر.س</strong>
-            </div>
-            <button class="checkout-btn" onclick="location.href='checkout.html'">إتمام الشراء</button>
-        </div>
-    </div>
-
-    <!-- Cart Overlay -->
-    <div class="cart-overlay" id="cart-overlay"></div>
+    
 @endsection

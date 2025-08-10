@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 
 </head>
@@ -25,18 +25,20 @@
             </div>
 
             <div class="nav-menu" id="nav-menu">
-                <a href="index.html" class="nav-link active">الرئيسية</a>
+                <a href="{{ route('home') }}" class="nav-link active">الرئيسية</a>
                 <a href="{{ route('products') }}" class="nav-link">المنتجات</a>
                 <div class="dropdown">
-                    <a href="#" class="nav-link">الأقسام ▼</a>
+                    <a href="#" class="nav-link">الأقسام <i style="margin-right: 5px;
+    font-size: 12px;" class="fas fa-chevron-down"></i>
+</a>
                     <div class="dropdown-content">
-                        <a href="products.html?category=electronics">إلكترونيات</a>
+                        <a href="{{ route('section') }}">إلكترونيات</a>
                         <a href="products.html?category=fashion">أزياء</a>
                         <a href="products.html?category=home">منزل</a>
                         <a href="products.html?category=books">كتب</a>
                     </div>
                 </div>
-                <a href="contact.html" class="nav-link">تواصل معنا</a>
+                <a href="{{ route('contact') }}" class="nav-link">تواصل معنا</a>
                 @auth
 
                     <form action="{{ route('logout') }}" method="post">
@@ -53,8 +55,7 @@
                             class="nav-link">تسجيل الخروج</button>
                     </form>
                 @else
-                     <a href="{{ route('login') }}"
-                        class="nav-link">تسجيل الدخول</a>
+                    <a href="{{ route('login') }}" class="nav-link">تسجيل الدخول</a>
                 @endauth
             </div>
 
@@ -112,6 +113,35 @@
             color: #fff;
         }
     </style>
+
+
+
+
+
+
+
+    <!-- Shopping Cart Sidebar -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>سلة التسوق</h3>
+            <button class="close-cart" id="close-cart">×</button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <p class="empty-cart">السلة فارغة</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <strong>الإجمالي: <span id="cart-total">0</span> ر.س</strong>
+            </div>
+            <button class="checkout-btn" onclick="location.href='checkout.html'">إتمام الشراء</button>
+        </div>
+    </div>
+
+    <!-- Cart Overlay -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+
+
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -191,36 +221,43 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>
-      document.addEventListener('DOMContentLoaded', () => {
-  const swiper = new Swiper(".mySwiper", {
-    slidesPerView: 4,
-    spaceBetween: 20,
-    loop: true,
-    autoplay: {
-      delay: 2000,
-      disableOnInteraction: false,
-    },
-    breakpoints: {
-      0: { slidesPerView: 1 },
-      576: { slidesPerView: 2 },
-      768: { slidesPerView: 3 },
-      1024: { slidesPerView: 4 },
-    },
-    on: {
-      init: function () {
-        this.el.addEventListener('mouseenter', () => {
-          this.autoplay.stop();
-          console.log('autoplay stopped on hover');
+        document.addEventListener('DOMContentLoaded', () => {
+            const swiper = new Swiper(".mySwiper", {
+                slidesPerView: 4,
+                spaceBetween: 20,
+                loop: true,
+                autoplay: {
+                    delay: 2000,
+                    disableOnInteraction: false,
+                },
+                breakpoints: {
+                    0: {
+                        slidesPerView: 1
+                    },
+                    576: {
+                        slidesPerView: 2
+                    },
+                    768: {
+                        slidesPerView: 3
+                    },
+                    1024: {
+                        slidesPerView: 4
+                    },
+                },
+                on: {
+                    init: function() {
+                        this.el.addEventListener('mouseenter', () => {
+                            this.autoplay.stop();
+                            console.log('autoplay stopped on hover');
+                        });
+                        this.el.addEventListener('mouseleave', () => {
+                            this.autoplay.start();
+                            console.log('autoplay started on leave');
+                        });
+                    },
+                },
+            });
         });
-        this.el.addEventListener('mouseleave', () => {
-          this.autoplay.start();
-          console.log('autoplay started on leave');
-        });
-      },
-    },
-  });
-});
-
     </script>
 </body>
 

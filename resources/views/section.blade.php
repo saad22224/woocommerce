@@ -16,13 +16,13 @@
                 <div class="filters-sidebar">
                     <h3>التصفية</h3>
 
-                    <div class="filter-group">
+                    {{-- <div class="filter-group">
                         <h4>الفئة</h4>
                         <label><input type="checkbox" value="electronics"> إلكترونيات</label>
                         <label><input type="checkbox" value="fashion"> أزياء</label>
                         <label><input type="checkbox" value="home"> منزل</label>
                         <label><input type="checkbox" value="books"> كتب</label>
-                    </div>
+                    </div> --}}
 
                     <div class="filter-group">
                         <h4>السعر</h4>
@@ -41,7 +41,7 @@
                             <option value="newest">الأحدث</option>
                             <option value="price-low">الأرخص أولاً</option>
                             <option value="price-high">الأغلى أولاً</option>
-                            <option value="popular">الأكثر شهرة</option>
+                            {{-- <option value="popular">الأكثر شهرة</option> --}}
                         </select>
                     </div>
 

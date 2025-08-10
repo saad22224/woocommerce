@@ -25,3 +25,10 @@ require __DIR__.'/auth.php';
 Route::get('products', function () {
     return view('products');
 })->name('products');
+
+Route::get('contact', function () {
+    return view('contact');
+})->name('contact');
+Route::get('section', function () {
+    return view('section');
+})->name('section');
