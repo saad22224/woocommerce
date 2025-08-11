@@ -38,3 +38,12 @@ Route::get('product_details', function () {
 Route::get('checkout', function () {
     return view('checkout');
 })->name('checkout');
+Route::get('terms', function () {
+    return view('terms');
+})->name('terms');
+Route::get('privacy', function () {
+    return view('privacy');
+})->name('privacy');
+Route::get('replacmentpolicy', function () {
+    return view('replacmentpolicy');
+})->name('replacmentpolicy');

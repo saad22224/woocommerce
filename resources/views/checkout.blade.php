@@ -1,6 +1,7 @@
 
 @extends('main')
 @section('content')
+
     <!-- Checkout Steps -->
     <section class="checkout-steps">
         <div class="container">
@@ -86,32 +87,41 @@
                             </div>
                         </div>
 
-                        <div class="form-section">
-                            <h3>طريقة الدفع</h3>
-                            <div class="payment-methods">
-                                <label class="payment-method">
-                                    <input type="radio" name="payment" value="card" checked>
-                                    <div class="method-info">
-                                        <span class="method-icon">💳</span>
-                                        <span class="method-title">بطاقة ائتمان</span>
-                                    </div>
-                                </label>
-                                <label class="payment-method">
-                                    <input type="radio" name="payment" value="bank">
-                                    <div class="method-info">
-                                        <span class="method-icon">🏦</span>
-                                        <span class="method-title">تحويل بنكي</span>
-                                    </div>
-                                </label>
-                                <label class="payment-method">
-                                    <input type="radio" name="payment" value="cod">
-                                    <div class="method-info">
-                                        <span class="method-icon">💵</span>
-                                        <span class="method-title">الدفع عند الاستلام</span>
-                                    </div>
-                                </label>
-                            </div>
-                        </div>
+                       <div class="form-section">
+    <h3>طريقة الدفع</h3>
+    <div class="payment-methods">
+        
+        <!-- الدفع عند الاستلام -->
+        <label class="payment-method">
+            <input type="radio" name="payment" value="cod" checked>
+            <div class="method-info">
+                <span class="method-icon"><i class="fas fa-money-bill-wave"></i></span>
+                <span class="method-title">الدفع عند الاستلام</span>
+                {{-- <span class="payment-icons">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-apple-pay"></i>
+                    <i class="fas fa-credit-card"></i>
+                </span> --}}
+            </div>
+        </label>
+
+        <!-- تمارا -->
+        <label class="payment-method">
+            <input type="radio" name="payment" value="tamara">
+            <div class="method-info">
+                <span class="method-icon"><i class="fas fa-wallet"></i></span>
+                <span class="method-title">تمارا</span>
+                <span class="payment-icons">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-apple-pay"></i>
+                </span>
+            </div>
+        </label>
+
+    </div>
+</div>
 
                         <div class="form-section card-details" id="card-details">
                             <h3>بيانات البطاقة</h3>
@@ -163,10 +173,10 @@
                         </div>
                     </div>
 
-                    <div class="promo-code">
+                    {{-- <div class="promo-code">
                         <input type="text" placeholder="كود الخصم" id="promo-input">
                         <button type="button" id="apply-promo">تطبيق</button>
-                    </div>
+                    </div> --}}
 
                     <button class="place-order-btn" id="place-order">تأكيد الطلب</button>
 

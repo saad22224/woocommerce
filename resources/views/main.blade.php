@@ -176,11 +176,11 @@
                 <div class="footer-section links">
                     <h4>روابط سريعة</h4>
                     <ul>
-                        <li><a href="index.html">الرئيسية</a></li>
-                        <li><a href="products.html">المنتجات</a></li>
-                        <li><a href="offers.html">العروض</a></li>
-                        <li><a href="contact.html">تواصل معنا</a></li>
-                        <li><a href="faq.html">الأسئلة الشائعة</a></li>
+                        <li><a href="{{ route('home') }}">الرئيسية</a></li>
+                        <li><a href="{{ route('products') }}">المنتجات</a></li>
+                        {{-- <li><a href="offers.html">العروض</a></li> --}}
+                        <li><a href="{{ route('contact') }}">تواصل معنا</a></li>
+                        {{-- <li><a href="faq.html">الأسئلة الشائعة</a></li> --}}
                     </ul>
                 </div>
 
@@ -188,10 +188,10 @@
                 <div class="footer-section account">
                     <h4>حسابي</h4>
                     <ul>
-                        <li><a href="login.html">تسجيل الدخول</a></li>
-                        <li><a href="register.html">إنشاء حساب</a></li>
-                        <li><a href="orders.html">طلباتي</a></li>
-                        <li><a href="wishlist.html">قائمة المفضلة</a></li>
+                        <li><a href="{{ route('login') }}">تسجيل الدخول</a></li>
+                        <li><a href="{{ route('register') }}">إنشاء حساب</a></li>
+                        {{-- <li><a href="orders.html">طلباتي</a></li> --}}
+                        {{-- <li><a href="wishlist.html">قائمة المفضلة</a></li> --}}
                     </ul>
                 </div>
 
@@ -199,10 +199,10 @@
                 <div class="footer-section policy">
                     <h4>سياساتنا</h4>
                     <ul>
-                        <li><a href="shipping.html">سياسة الشحن</a></li>
-                        <li><a href="returns.html">سياسة الإرجاع</a></li>
-                        <li><a href="privacy.html">سياسة الخصوصية</a></li>
-                        <li><a href="terms.html">الشروط والأحكام</a></li>
+                        {{-- <li><a href="shipping.html">سياسة الشحن</a></li> --}}
+                        <li><a href="{{ route('replacmentpolicy') }}">سياسة الإرجاع</a></li>
+                        <li><a href="{{ route('privacy') }}">سياسة الخصوصية</a></li>
+                        <li><a href="{{ route('terms') }}">الشروط والأحكام</a></li>
                     </ul>
                 </div>
 
@@ -223,7 +223,7 @@
             </div>
 
             <div class="footer-bottom">
-                <p>&copy; 2025 متجري الإلكتروني. جميع الحقوق محفوظة.</p>
+                <p>&copy; 2025  DASM. جميع الحقوق محفوظة.</p>
             </div>
         </div>
     </footer>
