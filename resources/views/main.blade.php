@@ -74,7 +74,8 @@
 
             <div class="nav-actions">
                 <button class="cart-btn" id="cart-btn">
-                    🛒 <span id="cart-count">0</span>
+                          <i class="fas fa-shopping-cart"></i>
+ <span id="cart-count">0</span>
                 </button>
                 <div class="hamburger" id="hamburger">
                     <span></span>
