@@ -13,6 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('styles.css') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/logo.jpeg') }}" type="image/x-icon">
 
 </head>
 
@@ -161,7 +162,12 @@
 
                 <!-- About -->
                 <div class="footer-section about">
-                    <h4>متجري</h4>
+                     <img style="
+                        height: 90px; /* ارتفاع ثابت */
+    width: auto; /* يحافظ على النسبة */
+    object-fit: contain; /* يضمن أن الصورة لا تتمدد أو تتقطع */
+    display: block;
+    border-radius: 10px; " src="{{ asset('assets/logo.jpeg') }}" alt="">
                     <p>أفضل متجر إلكتروني للتسوق الآمن والموثوق. نقدم منتجات أصلية بأسعار تنافسية مع خدمة توصيل سريعة
                         ودعم على مدار الساعة.</p>
                     <div class="social-icons">
