@@ -19,12 +19,15 @@
 
 <style>
     .nav-logo img {
-    height: 90px; /* ارتفاع ثابت */
-    width: auto; /* يحافظ على النسبة */
-    object-fit: contain; /* يضمن أن الصورة لا تتمدد أو تتقطع */
-    display: block;
-    border-radius: 10px;
-}
+        height: 90px;
+        /* ارتفاع ثابت */
+        width: auto;
+        /* يحافظ على النسبة */
+        object-fit: contain;
+        /* يضمن أن الصورة لا تتمدد أو تتقطع */
+        display: block;
+        border-radius: 10px;
+    }
 </style>
 
 <body>
@@ -33,8 +36,8 @@
         <div class="nav-container">
             <div class="nav-logo">
                 <a href="{{ route('home') }}">
-              <img src="{{ asset('assets/logo.jpeg') }}" alt="">
-              </a>
+                    <img src="{{ asset('assets/logo.jpeg') }}" alt="">
+                </a>
             </div>
 
             <div class="nav-menu" id="nav-menu">
@@ -42,13 +45,14 @@
                 <a href="{{ route('products') }}" class="nav-link">المنتجات</a>
                 <div class="dropdown">
                     <a href="#" class="nav-link">الأقسام <i style="margin-right: 5px;
-    font-size: 12px;" class="fas fa-chevron-down"></i>
-</a>
+    font-size: 12px;"
+                            class="fas fa-chevron-down"></i>
+                    </a>
                     <div class="dropdown-content">
-                        <a href="{{ route('section') }}">إلكترونيات</a>
-                        <a href="products.html?category=fashion">أزياء</a>
-                        <a href="products.html?category=home">منزل</a>
-                        <a href="products.html?category=books">كتب</a>
+                        @foreach ($activesection as $section)
+                            
+                        <a href="{{ route('section') }}">{{$section->name}}</a>
+                        @endforeach
                     </div>
                 </div>
                 <a href="{{ route('contact') }}" class="nav-link">تواصل معنا</a>
@@ -74,8 +78,8 @@
 
             <div class="nav-actions">
                 <button class="cart-btn" id="cart-btn">
-                          <i class="fas fa-shopping-cart"></i>
- <span id="cart-count">0</span>
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-count">0</span>
                 </button>
                 <div class="hamburger" id="hamburger">
                     <span></span>
@@ -163,12 +167,13 @@
 
                 <!-- About -->
                 <div class="footer-section about">
-                     <img style="
+                    <img style="
                         height: 90px; /* ارتفاع ثابت */
     width: auto; /* يحافظ على النسبة */
     object-fit: contain; /* يضمن أن الصورة لا تتمدد أو تتقطع */
     display: block;
-    border-radius: 10px; " src="{{ asset('assets/logo.jpeg') }}" alt="">
+    border-radius: 10px; "
+                        src="{{ asset('assets/logo.jpeg') }}" alt="">
                     <p>أفضل متجر إلكتروني للتسوق الآمن والموثوق. نقدم منتجات أصلية بأسعار تنافسية مع خدمة توصيل سريعة
                         ودعم على مدار الساعة.</p>
                     <div class="social-icons">
@@ -230,7 +235,7 @@
             </div>
 
             <div class="footer-bottom">
-                <p>&copy; 2025  DASM. جميع الحقوق محفوظة.</p>
+                <p>&copy; 2025 DASM. جميع الحقوق محفوظة.</p>
             </div>
         </div>
     </footer>

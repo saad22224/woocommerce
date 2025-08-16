@@ -1,6 +1,7 @@
 @extends('main')
 
 @section('content')
+    {{-- {{ dd($bestseller) }} --}}
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
@@ -501,26 +502,45 @@
             <!-- Swiper -->
             <div class="swiper mySwiper" id="products-swiper">
                 <div class="swiper-wrapper">
+                    @foreach ($latestproducts as $product)
+                        <div class="swiper-slide">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img src="{{ $product->image }}" alt="{{ $product->name }}">
+                                    <button class="add-to-cart">إضافة للسلة</button>
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-title">
+                                        <a href="{{ route('product_details') }}"
+                                            style="text-decoration: none; color: inherit;">{{ $product->name }}</a>
+                                    </h3>
+                                    <div class="product-price">{{ $product->price }} ر.س</div>
+                                    @php
+                                        $truncated = Str::words($product->description, 20, '');
+                                        $isTruncated = Str::wordCount($product->description) > 20;
+                                    @endphp
 
-                    <div class="swiper-slide">
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
-                                    alt="test">
-                                <button class="add-to-cart">إضافة للسلة</button>
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-title">
-                                    <a href="{{ route('product_details') }}" style="text-decoration: none; color: inherit;">test</a>
-                                </h3>
-                                <div class="product-price">100 ر.س</div>
-                                <p class="product-description">test</p>
+                                    <p class="product-description">
+
+                                        {{ $truncated }}
+                                        @if ($isTruncated)
+                                            <a href="#"
+                                                style="margin-left:8px; color:#2563eb; font-weight:500; transition:color 0.2s;"
+                                                onmouseover="this.style.color='#1e40af'"
+                                                onmouseout="this.style.color='#2563eb'">
+                                                عرض المزيد
+                                            </a>
+                                        @endif
+
+
+                                    </p>
+
+                                </div>
                             </div>
                         </div>
-                    </div>
-
+                    @endforeach
                     <!-- كرر باقي المنتجات هنا بنفس الشكل -->
-                    <div class="swiper-slide">
+                    {{-- <div class="swiper-slide">
                         <div class="product-card">
                             <div class="product-image">
                                 <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
@@ -663,7 +683,7 @@
                                 <p class="product-description">test</p>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                 </div>
             </div>
@@ -852,5 +872,4 @@
 
 
     <!-- Shopping Cart Sidebar -->
-    
 @endsection

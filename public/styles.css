@@ -233,7 +233,7 @@ body {
 .product-image {
     position: relative;
     overflow: hidden;
-    height: 250px;
+    height: 270px;
 }
 
 .product-image img {
