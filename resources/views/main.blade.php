@@ -14,6 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('styles.css') }}">
     <link rel="shortcut icon" href="{{ asset('assets/logo.jpeg') }}" type="image/x-icon">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 </head>
 

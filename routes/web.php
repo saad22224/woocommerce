@@ -46,3 +46,7 @@ Route::get('privacy', function () {
 Route::get('replacmentpolicy', function () {
     return view('replacmentpolicy');
 })->name('replacmentpolicy');
+
+
+Route::post('cart/add', [\App\Http\Controllers\user\CartController::class,
+ 'addToCart']);
