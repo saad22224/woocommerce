@@ -79,7 +79,7 @@
             <div class="nav-actions">
                 <button class="cart-btn" id="cart-btn">
                     <i class="fas fa-shopping-cart"></i>
-                    <span id="cart-count">0</span>
+                    <span id="cart-count"></span>
                 </button>
                 <div class="hamburger" id="hamburger">
                     <span></span>
@@ -242,6 +242,8 @@
 
 
     <script src="{{ asset('script.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>
@@ -305,7 +307,12 @@
                         })
                         .then(response => response.json())
                         .then(data => {
-                            alert(data.message);
+                            // alert(data.message);
+                            Swal.fire({
+                                title: "Good job!",
+                                text: data.message,
+                                icon: "success"
+                            });
                         })
                         .catch(error => console.error('Error:', error));
                 });
@@ -319,40 +326,61 @@
 
 
 
+        document.addEventListener('DOMContentLoaded', function() {
+            const cartBtn = document.getElementById("cart-btn");
+            const cartSidebar = document.getElementById("cart-sidebar");
+            const cartOverlay = document.getElementById("cart-overlay");
+            const closeCart = document.getElementById("close-cart");
+            const cartItemsContainer = document.getElementById("cart-items");
+            const cartTotal = document.getElementById("cart-total");
+            const cartCount = document.getElementById("cart-count");
 
-
-
-     document.addEventListener('DOMContentLoaded', function() {
-    const cartBtn = document.getElementById("cart-btn");
-    const cartSidebar = document.getElementById("cart-sidebar");
-    const cartOverlay = document.getElementById("cart-overlay");
-    const closeCart = document.getElementById("close-cart");
-    const cartItemsContainer = document.getElementById("cart-items");
-    const cartTotal = document.getElementById("cart-total");
-    const cartCount = document.getElementById("cart-count");
-
-    cartBtn.addEventListener('click', function() {
-        fetch('/cart/show', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            // 🟢 تحديث العدّاد بس عند تحميل الصفحة
+            function updateCartCount() {
+                fetch('/cart/show', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
+                                'content')
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.cart_items && data.cart_items.length > 0) {
+                            cartCount.textContent = data.cart_items.length;
+                        } else {
+                            cartCount.textContent = 0;
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
             }
-        })
-        .then(response => response.json())
-        .then(data => {
-            cartItemsContainer.innerHTML = ""; // فضّي القديم
-            let total = 0;
 
-            if (data.cart_items && data.cart_items.length > 0) {
-                data.cart_items.forEach(item => {
-                    const product = item.product;
-                    total += product.price * item.quantity;
+            // 🟢 عرض الكارت عند الضغط
+            cartBtn.addEventListener('click', function() {
+                fetch('/cart/show', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+                                .getAttribute('content')
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        cartItemsContainer.innerHTML = ""; // فضّي القديم
+                        let total = 0;
 
-                    const div = document.createElement("div");
-                    div.classList.add("cart-item");
-                    div.innerHTML = `
+                        if (data.cart_items && data.cart_items.length > 0) {
+                            data.cart_items.forEach(item => {
+                                const product = item.product;
+                                total += product.price * item.quantity;
+
+                                const div = document.createElement("div");
+                                div.classList.add("cart-item");
+                                div.innerHTML = `
                         <div class="cart-item-info">
                             <img src="${product.image}" alt="${product.name}" width="50" height="50">
                             <div>
@@ -361,34 +389,37 @@
                             </div>
                         </div>
                     `;
-                    cartItemsContainer.appendChild(div);
-                });
+                                cartItemsContainer.appendChild(div);
+                            });
 
-                cartCount.textContent = data.cart_items.length;
-            } else {
-                cartItemsContainer.innerHTML = "<p class='empty-cart'>السلة فارغة</p>";
-                cartCount.textContent = 0;
-            }
+                            cartCount.textContent = data.cart_items.length;
+                        } else {
+                            cartItemsContainer.innerHTML = "<p class='empty-cart'>السلة فارغة</p>";
+                            cartCount.textContent = 0;
+                        }
 
-            cartTotal.textContent = total;
+                        cartTotal.textContent = total;
 
-            // افتح السايدبار
-            cartSidebar.classList.add("open");
-            cartOverlay.classList.add("active");
-        })
-        .catch(error => console.error('Error:', error));
-    });
+                        // افتح السايدبار
+                        cartSidebar.classList.add("open");
+                        cartOverlay.classList.add("active");
+                    })
+                    .catch(error => console.error('Error:', error));
+            });
 
-    // زرار الإغلاق
-    closeCart.addEventListener("click", function() {
-        cartSidebar.classList.remove("open");
-        cartOverlay.classList.remove("active");
-    });
-    cartOverlay.addEventListener("click", function() {
-        cartSidebar.classList.remove("open");
-        cartOverlay.classList.remove("active");
-    });
-});
+            // زرار الإغلاق
+            closeCart.addEventListener("click", function() {
+                cartSidebar.classList.remove("open");
+                cartOverlay.classList.remove("active");
+            });
+            cartOverlay.addEventListener("click", function() {
+                cartSidebar.classList.remove("open");
+                cartOverlay.classList.remove("active");
+            });
+
+            // ✅ أول ما الصفحة تفتح، يحدّث العدّاد فقط
+            updateCartCount();
+        });
     </script>
 </body>
 

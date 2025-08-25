@@ -18,10 +18,12 @@
 
                     <div class="filter-group">
                         <h4>الفئة</h4>
-                        <label><input type="checkbox" value="electronics"> إلكترونيات</label>
-                        <label><input type="checkbox" value="fashion"> أزياء</label>
-                        <label><input type="checkbox" value="home"> منزل</label>
-                        <label><input type="checkbox" value="books"> كتب</label>
+                        @foreach ($activesection as $section)
+                            
+                      
+                        <label><input 
+                            type="checkbox" value="electronics"> {{ $section->name }}</label>
+                      @endforeach
                     </div>
 
                     <div class="filter-group">
