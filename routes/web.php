@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\user\HomeController;
+use App\Http\Controllers\user\ProductController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
@@ -21,9 +22,7 @@ Route::middleware(['auth'])->group(function () {
 require __DIR__.'/auth.php';
 
 
-Route::get('products', function () {
-    return view('products');
-})->name('products');
+Route::get('products', [ProductController::class , 'index'])->name('products');
 
 Route::get('contact', function () {
     return view('contact');
@@ -50,3 +49,5 @@ Route::get('replacmentpolicy', function () {
 
 Route::post('cart/add', [\App\Http\Controllers\user\CartController::class,
  'addToCart']);
+Route::post('cart/show', [\App\Http\Controllers\user\CartController::class,
+ 'showCart']);

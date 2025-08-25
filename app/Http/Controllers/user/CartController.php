@@ -43,4 +43,24 @@ class CartController extends Controller
             'quantity' => $validated['quantity'],
         ], 200);
     }
+
+    public function showCart(Request $request)
+    {
+        $user = auth()->user();
+        if (!$user) {
+            return response()->json(['message' => 'يرجي تسجيل الدخول اولا'], 401);
+        }
+
+        $cart = $user->cart;
+
+        if (!$cart) {
+            return response()->json(['message' => 'Cart is empty'], 200);
+        }
+
+        $cartItems = $cart->items()->with('product')->get();
+
+        return response()->json([
+            'cart_items' => $cartItems,
+        ], 200);
+    }
 }

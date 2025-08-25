@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('styles.css') }}">
     <link rel="shortcut icon" href="{{ asset('assets/logo.jpeg') }}" type="image/x-icon">
-<meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
 </head>
 
@@ -51,8 +51,7 @@
                     </a>
                     <div class="dropdown-content">
                         @foreach ($activesection as $section)
-                            
-                        <a href="{{ route('section') }}">{{$section->name}}</a>
+                            <a href="{{ route('section') }}">{{ $section->name }}</a>
                         @endforeach
                     </div>
                 </div>
@@ -283,6 +282,113 @@
                 },
             });
         });
+
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = this.getAttribute('data-id');
+
+                    fetch('/cart/add', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json',
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                'Authorization': 'Bearer {{ auth()->user()?->api_token }}' // لو عامل api_token
+                            },
+                            body: JSON.stringify({
+                                product_id: productId,
+                                quantity: 1
+                            })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            alert(data.message);
+                        })
+                        .catch(error => console.error('Error:', error));
+                });
+            });
+        });
+
+
+
+
+
+
+
+
+
+
+
+     document.addEventListener('DOMContentLoaded', function() {
+    const cartBtn = document.getElementById("cart-btn");
+    const cartSidebar = document.getElementById("cart-sidebar");
+    const cartOverlay = document.getElementById("cart-overlay");
+    const closeCart = document.getElementById("close-cart");
+    const cartItemsContainer = document.getElementById("cart-items");
+    const cartTotal = document.getElementById("cart-total");
+    const cartCount = document.getElementById("cart-count");
+
+    cartBtn.addEventListener('click', function() {
+        fetch('/cart/show', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            cartItemsContainer.innerHTML = ""; // فضّي القديم
+            let total = 0;
+
+            if (data.cart_items && data.cart_items.length > 0) {
+                data.cart_items.forEach(item => {
+                    const product = item.product;
+                    total += product.price * item.quantity;
+
+                    const div = document.createElement("div");
+                    div.classList.add("cart-item");
+                    div.innerHTML = `
+                        <div class="cart-item-info">
+                            <img src="${product.image}" alt="${product.name}" width="50" height="50">
+                            <div>
+                                <h4>${product.name}</h4>
+                                <p>${item.quantity} × ${product.price} ر.س</p>
+                            </div>
+                        </div>
+                    `;
+                    cartItemsContainer.appendChild(div);
+                });
+
+                cartCount.textContent = data.cart_items.length;
+            } else {
+                cartItemsContainer.innerHTML = "<p class='empty-cart'>السلة فارغة</p>";
+                cartCount.textContent = 0;
+            }
+
+            cartTotal.textContent = total;
+
+            // افتح السايدبار
+            cartSidebar.classList.add("open");
+            cartOverlay.classList.add("active");
+        })
+        .catch(error => console.error('Error:', error));
+    });
+
+    // زرار الإغلاق
+    closeCart.addEventListener("click", function() {
+        cartSidebar.classList.remove("open");
+        cartOverlay.classList.remove("active");
+    });
+    cartOverlay.addEventListener("click", function() {
+        cartSidebar.classList.remove("open");
+        cartOverlay.classList.remove("active");
+    });
+});
     </script>
 </body>
 
