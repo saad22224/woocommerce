@@ -12,7 +12,7 @@ class CartController extends Controller
     {
         $user = auth()->user();
         if (!$user) {
-            return response()->json(['message' => 'Unauthorized'], 401);
+            return response()->json(['error' => 'يجب عليك تسجيل الدخول للإستمتاع بمميزات المتجر'], 401);
         }
 
         $cart =   $user->cart()->FirstOrcreate([

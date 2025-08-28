@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('/styles.css') }}">
     <link rel="shortcut icon" href="{{ asset('assets/logo.jpeg') }}" type="image/x-icon">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -62,7 +62,7 @@
                         @csrf
                         <button
                             style="border: none ; background: none ; 
-                        cursor: pointer ;     color: white;
+                        cursor: pointer ;     color:black;
     text-decoration: none;
     font-weight: 500;
     padding: 0.5rem 1rem;
@@ -287,37 +287,124 @@
 
 
 
-     document.addEventListener('click', function(e) {
-    if (e.target.classList.contains('add-to-cart')) {
-        const productId = e.target.getAttribute('data-id');
+        // document.addEventListener('click', function(e) {
+        //     if (e.target.classList.contains('add-to-cart')) {
+        //         const productId = e.target.getAttribute('data-id');
 
-        fetch('/cart/add', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                'Authorization': 'Bearer {{ auth()->user()?->api_token }}'
-            },
-            body: JSON.stringify({
-                product_id: productId,
-                quantity: 1
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            Swal.fire({
-                title: "Good job!",
-                text: data.message,
-                icon: "success"
+        //         fetch('/cart/add', {
+        //                 method: 'POST',
+        //                 headers: {
+        //                     'Content-Type': 'application/json',
+        //                     'Accept': 'application/json',
+        //                     'X-CSRF-TOKEN': '{{ csrf_token() }}',
+        //                     'Authorization': 'Bearer {{ auth()->user()?->api_token }}'
+        //                 },
+        //                 body: JSON.stringify({
+        //                     product_id: productId,
+        //                     quantity: 1
+        //                 })
+        //             })
+        //             .then(response => response.json())
+        //             .then(data => {
+        //                 console.log(data);
+        //                 if (data.message) {
+
+        //                     Swal.fire({
+        //                         title: "Good job!",
+        //                         text: data.message,
+        //                         icon: "success"
+        //                     }).then((result) => {
+        //                         /* Read more about isConfirmed, isDenied below */
+        //                         if (result.isConfirmed) {
+
+        //                             updateCartCount();
+        //                         }
+        //                     });
+        //                 } else {
+        //                     Swal.fire({
+        //                         title: "Error!",
+        //                         text: data.error,
+        //                         icon: "error"
+        //                     }).then((result) => {
+        //                         /* Read more about isConfirmed, isDenied below */
+        //                         if (result.isConfirmed) {
+        //                             window.location.href = "{{ route('login') }}";
+        //                         }
+        //                     });
+        //                 }
+        //             })
+        //             .catch(error => console.error('Error:', error));
+        //     }
+        // });
+
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const cartCount = document.getElementById('cart-count'); // تعريف العنصر بعد تحميل الصفحة
+
+            function updateCartCount() {
+                fetch('/cart/show', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
+                                'content')
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (cartCount) { // نتأكد العنصر موجود
+                            cartCount.textContent = data.cart_items ? data.cart_items.length : 0;
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('add-to-cart')) {
+                    const productId = e.target.getAttribute('data-id');
+
+                    fetch('/cart/add', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json',
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                'Authorization': 'Bearer {{ auth()->user()?->api_token }}'
+                            },
+                            body: JSON.stringify({
+                                product_id: productId,
+                                quantity: 1
+                            })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.message) {
+                                Swal.fire({
+                                    title: "Good job!",
+                                    text: data.message,
+                                    icon: "success"
+                                }).then(() => {
+                                    updateCartCount(); // هنا هيشتغل بعد الضغط على OK
+                                });
+                            } else {
+                                Swal.fire({
+                                    title: "Error!",
+                                    text: data.error,
+                                    icon: "error"
+                                }).then(() => {
+                                    window.location.href = "{{ route('login') }}";
+                                });
+                            }
+                        })
+                        .catch(error => console.error('Error:', error));
+                }
             });
-        })
-        .catch(error => console.error('Error:', error));
-    }
-});
 
-
-
+            // لو حابب تحدّث العدد عند تحميل الصفحة مباشرة
+            updateCartCount();
+        });
 
 
 
@@ -333,26 +420,26 @@
             const cartCount = document.getElementById("cart-count");
 
             // 🟢 تحديث العدّاد بس عند تحميل الصفحة
-            function updateCartCount() {
-                fetch('/cart/show', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Accept': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
-                                'content')
-                        }
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.cart_items && data.cart_items.length > 0) {
-                            cartCount.textContent = data.cart_items.length;
-                        } else {
-                            cartCount.textContent = 0;
-                        }
-                    })
-                    .catch(error => console.error('Error:', error));
-            }
+            // function updateCartCount() {
+            //     fetch('/cart/show', {
+            //             method: 'POST',
+            //             headers: {
+            //                 'Content-Type': 'application/json',
+            //                 'Accept': 'application/json',
+            //                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
+            //                     'content')
+            //             }
+            //         })
+            //         .then(response => response.json())
+            //         .then(data => {
+            //             if (data.cart_items && data.cart_items.length > 0) {
+            //                 cartCount.textContent = data.cart_items.length;
+            //             } else {
+            //                 cartCount.textContent = 0;
+            //             }
+            //         })
+            //         .catch(error => console.error('Error:', error));
+            // }
 
             // 🟢 عرض الكارت عند الضغط
             cartBtn.addEventListener('click', function() {
