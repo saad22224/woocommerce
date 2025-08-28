@@ -287,37 +287,34 @@
 
 
 
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.add-to-cart').forEach(button => {
-                button.addEventListener('click', function() {
-                    const productId = this.getAttribute('data-id');
+     document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('add-to-cart')) {
+        const productId = e.target.getAttribute('data-id');
 
-                    fetch('/cart/add', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'Accept': 'application/json',
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                                'Authorization': 'Bearer {{ auth()->user()?->api_token }}' // لو عامل api_token
-                            },
-                            body: JSON.stringify({
-                                product_id: productId,
-                                quantity: 1
-                            })
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            // alert(data.message);
-                            Swal.fire({
-                                title: "Good job!",
-                                text: data.message,
-                                icon: "success"
-                            });
-                        })
-                        .catch(error => console.error('Error:', error));
-                });
+        fetch('/cart/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Authorization': 'Bearer {{ auth()->user()?->api_token }}'
+            },
+            body: JSON.stringify({
+                product_id: productId,
+                quantity: 1
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            Swal.fire({
+                title: "Good job!",
+                text: data.message,
+                icon: "success"
             });
-        });
+        })
+        .catch(error => console.error('Error:', error));
+    }
+});
 
 
 

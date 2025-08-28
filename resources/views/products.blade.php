@@ -19,11 +19,8 @@
                     <div class="filter-group">
                         <h4>الفئة</h4>
                         @foreach ($activesection as $section)
-                            
-                      
-                        <label><input 
-                            type="checkbox" value="electronics"> {{ $section->name }}</label>
-                      @endforeach
+                            <label><input type="checkbox" value="electronics"> {{ $section->name }}</label>
+                        @endforeach
                     </div>
 
                     <div class="filter-group">
@@ -57,27 +54,25 @@
                         <button class="filters-toggle" id="filters-toggle">🔽 التصفية</button>
                     </div>
 
-                    <div class="products-grid" id="all-products-grid">
-                        <!-- Products will be loaded here -->
+                    <div id="all-products-grid" class="products-grid">
                         @foreach ($products as $product)
                             <div class="product-card">
                                 <div class="product-image">
-                                    <img src="{{ $product->image }}"
-                                        alt="test">
+                                    <img src="{{ $product->image }}" alt="test">
                                      <button class="add-to-cart" data-id="{{ $product->id }}">إضافة للسلة</button>
                                 </div>
                                 <div class="product-info">
                                     <h3 class="product-title">
-                                        <a href="#" style="text-decoration: none; color: inherit;">{{ $product->name }}</a>
+                                        <a href="#"
+                                            style="text-decoration: none; color: inherit;">{{ $product->name }}</a>
                                     </h3>
                                     <div class="product-price">{{ $product->price }} ر.س</div>
-                                       @php
+                                    @php
                                         $truncated = Str::words($product->description, 20, '');
                                         $isTruncated = Str::wordCount($product->description) > 20;
                                     @endphp
 
                                     <p class="product-description">
-
                                         {{ $truncated }}
                                         @if ($isTruncated)
                                             <a href="#"
@@ -87,184 +82,108 @@
                                                 عرض المزيد
                                             </a>
                                         @endif
+                                    </p>
                                 </div>
                             </div>
                         @endforeach
-                        {{-- <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
-                                    alt="test">
-                                <button class="add-to-cart">إضافة للسلة</button>
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-title">
-                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
-                                </h3>
-                                <div class="product-price">100 ر.س</div>
-                                <p class="product-description">test</p>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
-                                    alt="test">
-                                <button class="add-to-cart">إضافة للسلة</button>
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-title">
-                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
-                                </h3>
-                                <div class="product-price">100 ر.س</div>
-                                <p class="product-description">test</p>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
-                                    alt="test">
-                                <button class="add-to-cart">إضافة للسلة</button>
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-title">
-                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
-                                </h3>
-                                <div class="product-price">100 ر.س</div>
-                                <p class="product-description">test</p>
-                            </div>
-                        </div>
-
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
-                                    alt="test">
-                                <button class="add-to-cart">إضافة للسلة</button>
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-title">
-                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
-                                </h3>
-                                <div class="product-price">100 ر.س</div>
-                                <p class="product-description">test</p>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
-                                    alt="test">
-                                <button class="add-to-cart">إضافة للسلة</button>
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-title">
-                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
-                                </h3>
-                                <div class="product-price">100 ر.س</div>
-                                <p class="product-description">test</p>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
-                                    alt="test">
-                                <button class="add-to-cart">إضافة للسلة</button>
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-title">
-                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
-                                </h3>
-                                <div class="product-price">100 ر.س</div>
-                                <p class="product-description">test</p>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
-                                    alt="test">
-                                <button class="add-to-cart">إضافة للسلة</button>
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-title">
-                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
-                                </h3>
-                                <div class="product-price">100 ر.س</div>
-                                <p class="product-description">test</p>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
-                                    alt="test">
-                                <button class="add-to-cart">إضافة للسلة</button>
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-title">
-                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
-                                </h3>
-                                <div class="product-price">100 ر.س</div>
-                                <p class="product-description">test</p>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
-                                    alt="test">
-                                <button class="add-to-cart">إضافة للسلة</button>
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-title">
-                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
-                                </h3>
-                                <div class="product-price">100 ر.س</div>
-                                <p class="product-description">test</p>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
-                                    alt="test">
-                                <button class="add-to-cart">إضافة للسلة</button>
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-title">
-                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
-                                </h3>
-                                <div class="product-price">100 ر.س</div>
-                                <p class="product-description">test</p>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
-                                    alt="test">
-                                <button class="add-to-cart">إضافة للسلة</button>
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-title">
-                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
-                                </h3>
-                                <div class="product-price">100 ر.س</div>
-                                <p class="product-description">test</p>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
-                                    alt="test">
-                                <button class="add-to-cart">إضافة للسلة</button>
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-title">
-                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
-                                </h3>
-                                <div class="product-price">100 ر.س</div>
-                                <p class="product-description">test</p>
-                            </div>
-                        </div> --}}
-
                     </div>
+
+                    <!-- زر عرض المزيد -->
+                    <div style="text-align:center; margin-top:20px;">
+                        <button id="load-more" data-offset="20"
+                            style="background-color:rgb(102,126,234); color:white; padding:10px 20px; border:none; border-radius:6px; cursor:pointer; font-weight:bold; transition:opacity 0.3s;">
+                            عرض المزيد
+                        </button>
+                        <div id="loading" style="display:none; margin-top:10px; color:#666; font-size:14px;">
+                            جاري التحميل...
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Shopping Cart Sidebar -->
+
+
+    <script>
+        function truncateWords(str, limit) {
+            let words = str.split(/\s+/);
+            if (words.length <= limit) return str;
+            return words.slice(0, limit).join(" ");
+        }
+
+        function wordCount(str) {
+            return str.trim().split(/\s+/).length;
+        }
+
+        document.getElementById('load-more').addEventListener('click', function() {
+            let offset = this.getAttribute('data-offset');
+            let button = this;
+            let loading = document.getElementById('loading');
+
+            // إظهار اللودينج وإخفاء الزر مؤقتًا
+            button.style.opacity = "0.6";
+            button.disabled = true;
+            loading.style.display = "block";
+
+            fetch("{{ route('products') }}?offset=" + offset, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                .then(res => res.json())
+                .then(data => {
+                    let container = document.getElementById('all-products-grid');
+
+                    data.forEach(p => {
+                        let div = document.createElement('div');
+                        div.classList.add('product-card');
+                        div.innerHTML = `
+                <div class="product-image">
+                    <img src="${p.image}" alt="test">
+                    <button class="add-to-cart" data-id="${p.id}">إضافة للسلة</button>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">
+                        <a href="#" style="text-decoration: none; color: inherit;">${p.name}</a>
+                    </h3>
+                    <div class="product-price">${p.price} ر.س</div>
+                    <p class="product-description">
+                        ${truncateWords(p.description, 20)}
+                        ${wordCount(p.description) > 20 
+                            ? `<a href="#" 
+                                      style="margin-left:8px; color:#2563eb; font-weight:500; transition:color 0.2s;"
+                                      onmouseover="this.style.color='#1e40af'"
+                                      onmouseout="this.style.color='#2563eb'">
+                                      عرض المزيد
+                                   </a>` 
+                            : ''}
+                    </p>
+                </div>
+            `;
+                        container.appendChild(div);
+                    });
+
+                    // تحديث offset
+                    button.setAttribute('data-offset', parseInt(offset) + 20);
+
+                    // لو مفيش منتجات تاني نخفي الزر
+                    if (data.length < 20) {
+                        button.style.display = "none";
+                        loading.textContent = "تم عرض كل المنتجات ✅";
+                    } else {
+                        button.style.opacity = "1";
+                        button.disabled = false;
+                        loading.style.display = "none";
+                    }
+                })
+                .catch(() => {
+                    loading.textContent = "حدث خطأ، حاول مرة أخرى ❌";
+                    button.style.opacity = "1";
+                    button.disabled = false;
+                });
+        });
+    </script>
 @endsection
