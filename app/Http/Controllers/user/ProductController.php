@@ -6,19 +6,26 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Section;
+use App\services\productService;
 
 class ProductController extends Controller
 {
+
+    private $productService;
+
+    public function __construct(productService $productService)
+    {
+        $this->productService = $productService;
+    }
     public function index(Request $request)
     {
-        $activesection = Section::where('status', '1')->get();
-        $products = Product::orderBy('id', 'DESC')
-        ->skip($request->get('offset' , 0))->take(20)
-        ->get();
+
+        $data =   $this->productService->index($request);
 
         if ($request->ajax()) {
-            return response()->json($products);
+            return $data;
         }
-        return view('products', compact('products', 'activesection'));
+
+        return view('products', $data);
     }
 }
