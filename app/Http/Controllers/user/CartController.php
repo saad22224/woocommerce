@@ -5,42 +5,36 @@ namespace App\Http\Controllers\user;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Cart;
+use App\services\cartService;
 
 class CartController extends Controller
 {
+
+    private $cartService;
+
+    public function __construct(CartService $cartService)
+    {
+        $this->cartService = $cartService;
+    }
     public function addToCart(Request $request)
     {
-        $user = auth()->user();
-        if (!$user) {
-            return response()->json(['error' => 'يجب عليك تسجيل الدخول للإستمتاع بمميزات المتجر'], 401);
-        }
-
-        $cart =   $user->cart()->FirstOrcreate([
-            'user_id' => $user->id
-        ]);
 
         $validated = $request->validate([
             'product_id' => 'required|integer',
             'quantity' => 'required|integer|min:1',
         ]);
 
-
-        $cartItem = $cart->items()->where('product_id', $request->product_id)->first();
-
-        if ($cartItem) {
-            $cartItem->quantity += $request->quantity;
-            $cartItem->save();
-        } else {
-            $cart->items()->create([
-                'product_id' => $request->product_id,
-                'quantity'   => $request->quantity,
-            ]);
+        $user = auth()->user();
+        if (!$user) {
+            return response()->json(['error' => 'يجب عليك تسجيل الدخول للإستمتاع بمميزات المتجر'], 401);
         }
+
+
+        $this->cartService->addtocart($user, $validated['product_id'], $validated['quantity']);
+
 
         return response()->json([
             'message' => 'Product added to cart successfully',
-            'product_id' => $validated['product_id'],
-            'quantity' => $validated['quantity'],
         ], 200);
     }
 
@@ -61,6 +55,6 @@ class CartController extends Controller
 
         return response()->json([
             'cart_items' => $cartItems,
-        ], 200);
+        ], 200); 
     }
 }
