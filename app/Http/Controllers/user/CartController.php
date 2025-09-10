@@ -45,16 +45,18 @@ class CartController extends Controller
             return response()->json(['message' => 'يرجي تسجيل الدخول اولا'], 401);
         }
 
-        $cart = $user->cart;
+       $data =  $this->cartService->showcart($user);
 
-        if (!$cart) {
-            return response()->json(['message' => 'Cart is empty'], 200);
-        }
+        // $cart = $user->cart;
 
-        $cartItems = $cart->items()->with('product')->get();
+        // if (!$cart) {
+        //     return response()->json(['message' => 'Cart is empty'], 200);
+        // }
+
+        // $cartItems = $cart->items()->with('product')->get();
 
         return response()->json([
-            'cart_items' => $cartItems,
+            'cart_items' => $data['cartItems'],
         ], 200); 
     }
 }

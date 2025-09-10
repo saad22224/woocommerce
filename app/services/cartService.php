@@ -29,4 +29,15 @@ class cartService
             ]);
         }
     }
+
+    public function showcart($user)
+    {
+        $data =  $this->cartRepository->showcart($user);
+
+        if(!$data['cart']){
+            return response()->json(['message' => 'Cart is empty'], 200);
+        }
+
+        return $data;
+    }
 }
