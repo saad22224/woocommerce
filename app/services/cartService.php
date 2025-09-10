@@ -34,10 +34,19 @@ class cartService
     {
         $data =  $this->cartRepository->showcart($user);
 
-        if(!$data['cart']){
+        if (!$data['cart']) {
             return response()->json(['message' => 'Cart is empty'], 200);
         }
 
         return $data;
+    }
+
+    public function deletefromcart($user, $product) {
+        $productexist = $user->cart->items()->where('product_id', $product)->first();
+
+        if (!$productexist) {
+            return response()->json(['message' => 'Product not found in cart'], 200);
+        }
+        $this->cartRepository->deletefromcart($user, $product);
     }
 }

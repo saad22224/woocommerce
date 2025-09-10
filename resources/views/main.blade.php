@@ -339,171 +339,206 @@
 
 
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const cartCount = document.getElementById('cart-count'); // تعريف العنصر بعد تحميل الصفحة
+     // 🔴 المشكلة: الـ function دي كانت جوا DOMContentLoaded فمش شايفاها
+// ✅ الحل: نحطها برا عشان كل حد يشوفها
 
-            function updateCartCount() {
-                fetch('/cart/show', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Accept': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
-                                'content')
-                        }
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (cartCount) { // نتأكد العنصر موجود
-                            cartCount.textContent = data.cart_items ? data.cart_items.length : 0;
-                        }
-                    })
-                    .catch(error => console.error('Error:', error));
+function updateCartCount() {
+    const cartCount = document.getElementById('cart-count');
+    
+    fetch('/cart/show', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
             }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (cartCount) {
+                cartCount.textContent = data.cart_items ? data.cart_items.length : 0;
+            }
+        })
+        .catch(error => console.error('Error:', error));
+}
 
-            document.addEventListener('click', function(e) {
-                if (e.target.classList.contains('add-to-cart')) {
-                    const productId = e.target.getAttribute('data-id');
+// باقي الكود زي ما هو...
+document.addEventListener('DOMContentLoaded', function() {
+    const cartCount = document.getElementById('cart-count');
 
-                    fetch('/cart/add', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'Accept': 'application/json',
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                                'Authorization': 'Bearer {{ auth()->user()?->api_token }}'
-                            },
-                            body: JSON.stringify({
-                                product_id: productId,
-                                quantity: 1
-                            })
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.message) {
-                                Swal.fire({
-                                    title: "Good job!",
-                                    text: data.message,
-                                    icon: "success"
-                                }).then(() => {
-                                    updateCartCount(); // هنا هيشتغل بعد الضغط على OK
-                                });
-                            } else {
-                                Swal.fire({
-                                    title: "Error!",
-                                    text: data.error,
-                                    icon: "error"
-                                }).then(() => {
-                                    window.location.href = "{{ route('login') }}";
-                                });
-                            }
-                        })
-                        .catch(error => console.error('Error:', error));
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('add-to-cart')) {
+            const productId = e.target.getAttribute('data-id');
+
+            fetch('/cart/add', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Authorization': 'Bearer {{ auth()->user()?->api_token }}'
+                    },
+                    body: JSON.stringify({
+                        product_id: productId,
+                        quantity: 1
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message) {
+                        Swal.fire({
+                            title: "Good job!",
+                            text: data.message,
+                            icon: "success"
+                        }).then(() => {
+                            updateCartCount(); // ✅ دلوقتي هتشتغل
+                        });
+                    } else {
+                        Swal.fire({
+                            title: "Error!",
+                            text: data.error,
+                            icon: "error"
+                        }).then(() => {
+                            window.location.href = "{{ route('login') }}";
+                        });
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    });
+
+    updateCartCount(); // تحديث العدد عند تحميل الصفحة
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const cartBtn = document.getElementById("cart-btn");
+    const cartSidebar = document.getElementById("cart-sidebar");
+    const cartOverlay = document.getElementById("cart-overlay");
+    const closeCart = document.getElementById("close-cart");
+    const cartItemsContainer = document.getElementById("cart-items");
+    const cartTotal = document.getElementById("cart-total");
+    const cartCount = document.getElementById("cart-count");
+
+    cartBtn.addEventListener('click', function() {
+        fetch('/cart/show', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+                        .getAttribute('content')
                 }
-            });
+            })
+            .then(response => response.json())
+            .then(data => {
+                cartItemsContainer.innerHTML = "";
+                let total = 0;
 
-            // لو حابب تحدّث العدد عند تحميل الصفحة مباشرة
-            updateCartCount();
-        });
+                if (data.cart_items && data.cart_items.length > 0) {
+                    data.cart_items.forEach(item => {
+                        const product = item.product;
+                        total += product.price * item.quantity;
 
+                        const div = document.createElement("div");
+                        div.classList.add("cart-item");
+                        div.innerHTML = `
+    <div class="cart-item-info" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;padding:8px;border-bottom:1px solid #ddd;">
+        <div style="display:flex;align-items:center;gap:10px;">
+            <img src="${product.image}" alt="${product.name}" width="50" height="50" style="border-radius:6px;">
+            <div>
+                <h4 style="margin:0;font-size:14px;font-weight:bold;">${product.name}</h4>
+                <p style="margin:0;color:#666;font-size:13px;">${item.quantity} × ${product.price} ر.س</p>
+            </div>
+        </div>
+        <button class="remove-from-cart" data-id="${product.id}" onclick="removeFromCart(${product.id})"
+            style="background:none;border:none;color:#e74c3c;font-size:18px;cursor:pointer;font-weight:bold;">
+            ×
+        </button>
+    </div>
+`;
+                        cartItemsContainer.appendChild(div);
+                    });
+                    cartCount.textContent = data.cart_items.length;
+                } else {
+                    cartItemsContainer.innerHTML = "<p class='empty-cart'>السلة فارغة</p>";
+                    cartCount.textContent = 0;
+                }
 
+                cartTotal.textContent = total;
+                cartSidebar.classList.add("open");
+                cartOverlay.classList.add("active");
+            })
+            .catch(error => console.error('Error:', error));
+    });
 
+    closeCart.addEventListener("click", function() {
+        cartSidebar.classList.remove("open");
+        cartOverlay.classList.remove("active");
+    });
+    cartOverlay.addEventListener("click", function() {
+        cartSidebar.classList.remove("open");
+        cartOverlay.classList.remove("active");
+    });
+});
 
+function removeFromCart(productId) {
+    fetch('/cart/delete', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify({
+                product_id: productId
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message) {
+                Swal.fire({
+                    title: "تم الحذف",
+                    text: data.message,
+                    icon: "success"
+                }).then(() => {
+                    // نشيل العنصر من الصفحة
+                    const itemElement = document.querySelector(
+                        `.remove-from-cart[data-id="${productId}"]`).closest(".cart-item");
+                    if (itemElement) itemElement.remove();
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const cartBtn = document.getElementById("cart-btn");
-            const cartSidebar = document.getElementById("cart-sidebar");
-            const cartOverlay = document.getElementById("cart-overlay");
-            const closeCart = document.getElementById("close-cart");
-            const cartItemsContainer = document.getElementById("cart-items");
-            const cartTotal = document.getElementById("cart-total");
-            const cartCount = document.getElementById("cart-count");
+                    // ✅ دلوقتي هتشتغل لأن الـ function بقت برا
+                    updateCartCount();
 
-            // 🟢 تحديث العدّاد بس عند تحميل الصفحة
-            // function updateCartCount() {
-            //     fetch('/cart/show', {
-            //             method: 'POST',
-            //             headers: {
-            //                 'Content-Type': 'application/json',
-            //                 'Accept': 'application/json',
-            //                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
-            //                     'content')
-            //             }
-            //         })
-            //         .then(response => response.json())
-            //         .then(data => {
-            //             if (data.cart_items && data.cart_items.length > 0) {
-            //                 cartCount.textContent = data.cart_items.length;
-            //             } else {
-            //                 cartCount.textContent = 0;
-            //             }
-            //         })
-            //         .catch(error => console.error('Error:', error));
-            // }
-
-            // 🟢 عرض الكارت عند الضغط
-            cartBtn.addEventListener('click', function() {
-                fetch('/cart/show', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Accept': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
-                                .getAttribute('content')
+                    // إعادة حساب الإجمالي
+                    let total = 0;
+                    document.querySelectorAll(".cart-item").forEach(item => {
+                        const priceText = item.querySelector("p").textContent;
+                        const match = priceText.match(/(\d+)/g);
+                        if (match && match.length >= 2) {
+                            const quantity = parseInt(match[0]);
+                            const price = parseInt(match[1]);
+                            total += quantity * price;
                         }
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        cartItemsContainer.innerHTML = ""; // فضّي القديم
-                        let total = 0;
+                    });
+                    document.getElementById("cart-total").textContent = total;
 
-                        if (data.cart_items && data.cart_items.length > 0) {
-                            data.cart_items.forEach(item => {
-                                const product = item.product;
-                                total += product.price * item.quantity;
-
-                                const div = document.createElement("div");
-                                div.classList.add("cart-item");
-                                div.innerHTML = `
-                        <div class="cart-item-info">
-                            <img src="${product.image}" alt="${product.name}" width="50" height="50">
-                            <div>
-                                <h4>${product.name}</h4>
-                                <p>${item.quantity} × ${product.price} ر.س</p>
-                            </div>
-                        </div>
-                    `;
-                                cartItemsContainer.appendChild(div);
-                            });
-
-                            cartCount.textContent = data.cart_items.length;
-                        } else {
-                            cartItemsContainer.innerHTML = "<p class='empty-cart'>السلة فارغة</p>";
-                            cartCount.textContent = 0;
-                        }
-
-                        cartTotal.textContent = total;
-
-                        // افتح السايدبار
-                        cartSidebar.classList.add("open");
-                        cartOverlay.classList.add("active");
-                    })
-                    .catch(error => console.error('Error:', error));
-            });
-
-            // زرار الإغلاق
-            closeCart.addEventListener("click", function() {
-                cartSidebar.classList.remove("open");
-                cartOverlay.classList.remove("active");
-            });
-            cartOverlay.addEventListener("click", function() {
-                cartSidebar.classList.remove("open");
-                cartOverlay.classList.remove("active");
-            });
-
-            // ✅ أول ما الصفحة تفتح، يحدّث العدّاد فقط
-            updateCartCount();
-        });
+                    if (document.querySelectorAll(".cart-item").length === 0) {
+                        document.getElementById("cart-items").innerHTML = "<p class='empty-cart'>السلة فارغة</p>";
+                        document.getElementById("cart-total").textContent = 0;
+                    }
+                });
+            } else {
+                Swal.fire({
+                    title: "Error!",
+                    text: data.error,
+                    icon: "error"
+                }).then(() => {
+                    window.location.href = "{{ route('login') }}";
+                });
+            }
+        })
+        .catch(error => console.error('Error:', error));
+}
     </script>
 </body>
 

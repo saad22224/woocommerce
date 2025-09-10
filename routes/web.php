@@ -51,3 +51,5 @@ Route::post('cart/add', [\App\Http\Controllers\user\CartController::class,
  'addToCart']);
 Route::post('cart/show', [\App\Http\Controllers\user\CartController::class,
  'showCart']);
+Route::delete('cart/delete', [\App\Http\Controllers\user\CartController::class,
+ 'removeFromCart']);

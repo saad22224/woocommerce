@@ -45,7 +45,7 @@ class CartController extends Controller
             return response()->json(['message' => 'يرجي تسجيل الدخول اولا'], 401);
         }
 
-       $data =  $this->cartService->showcart($user);
+        $data =  $this->cartService->showcart($user);
 
         // $cart = $user->cart;
 
@@ -57,6 +57,23 @@ class CartController extends Controller
 
         return response()->json([
             'cart_items' => $data['cartItems'],
-        ], 200); 
+        ], 200);
+    }
+
+    public function removeFromCart(Request $request)
+    {
+        $validated = $request->validate([
+            'product_id' => 'required|integer',
+        ]);
+        $user = auth()->user();
+        if (!$user) {
+            return response()->json(['error' => 'يجب عليك تسجيل الدخول للإستمتاع بمميزات المتجر'], 401);
+        }
+
+        $this->cartService->deletefromcart($user, $validated['product_id']);
+
+        return response()->json([
+            'message' => 'Product removed from cart successfully',
+        ], 200);
     }
 }

@@ -26,4 +26,10 @@ class cartRepository
             'cart' => $cart
         ];
     }
+
+    public function deletefromcart($user, $product)
+    {
+        $cart = $user->cart;
+        $cart->items()->where('product_id', $product)->delete();
+    }
 }
