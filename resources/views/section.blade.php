@@ -7,7 +7,7 @@
             <p>اكتشف مجموعتنا الواسعة من المنتجات المميزة</p>
         </div>
     </section>
-
+    {{-- {{ dd($data) }} --}}
     <!-- Filters and Products -->
     <section class="products-section">
         <div class="container">
@@ -57,189 +57,38 @@
 
                     <div class="products-grid" id="all-products-grid">
                         <!-- Products will be loaded here -->
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
-                                    alt="test">
-                                <button class="add-to-cart">إضافة للسلة</button>
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-title">
-                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
-                                </h3>
-                                <div class="product-price">100 ر.س</div>
-                                <p class="product-description">test</p>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
-                                    alt="test">
-                                <button class="add-to-cart">إضافة للسلة</button>
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-title">
-                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
-                                </h3>
-                                <div class="product-price">100 ر.س</div>
-                                <p class="product-description">test</p>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
-                                    alt="test">
-                                <button class="add-to-cart">إضافة للسلة</button>
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-title">
-                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
-                                </h3>
-                                <div class="product-price">100 ر.س</div>
-                                <p class="product-description">test</p>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
-                                    alt="test">
-                                <button class="add-to-cart">إضافة للسلة</button>
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-title">
-                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
-                                </h3>
-                                <div class="product-price">100 ر.س</div>
-                                <p class="product-description">test</p>
-                            </div>
-                        </div>
+                        @foreach ($data as $product)
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img loading="lazy" src="{{ $product->image }}" alt="test">
+                                    <button class="add-to-cart" data-id="{{ $product->id }}">إضافة للسلة</button>
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-title">
+                                        <a href="#"
+                                            style="text-decoration: none; color: inherit;">{{ $product->name }}</a>
+                                    </h3>
+                                    <div class="product-price">{{ $product->price }} ر.س</div>
+                                    @php
+                                        $truncated = Str::words($product->description, 20, '');
+                                        $isTruncated = Str::wordCount($product->description) > 20;
+                                    @endphp
 
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
-                                    alt="test">
-                                <button class="add-to-cart">إضافة للسلة</button>
+                                    <p class="product-description">
+                                        {{ $truncated }}
+                                        @if ($isTruncated)
+                                            <a href="#"
+                                                style="margin-left:8px; color:#2563eb; font-weight:500; transition:color 0.2s;"
+                                                onmouseover="this.style.color='#1e40af'"
+                                                onmouseout="this.style.color='#2563eb'">
+                                                عرض المزيد
+                                            </a>
+                                        @endif
+                                    </p>
+                                </div>
                             </div>
-                            <div class="product-info">
-                                <h3 class="product-title">
-                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
-                                </h3>
-                                <div class="product-price">100 ر.س</div>
-                                <p class="product-description">test</p>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
-                                    alt="test">
-                                <button class="add-to-cart">إضافة للسلة</button>
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-title">
-                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
-                                </h3>
-                                <div class="product-price">100 ر.س</div>
-                                <p class="product-description">test</p>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
-                                    alt="test">
-                                <button class="add-to-cart">إضافة للسلة</button>
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-title">
-                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
-                                </h3>
-                                <div class="product-price">100 ر.س</div>
-                                <p class="product-description">test</p>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
-                                    alt="test">
-                                <button class="add-to-cart">إضافة للسلة</button>
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-title">
-                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
-                                </h3>
-                                <div class="product-price">100 ر.س</div>
-                                <p class="product-description">test</p>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
-                                    alt="test">
-                                <button class="add-to-cart">إضافة للسلة</button>
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-title">
-                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
-                                </h3>
-                                <div class="product-price">100 ر.س</div>
-                                <p class="product-description">test</p>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
-                                    alt="test">
-                                <button class="add-to-cart">إضافة للسلة</button>
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-title">
-                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
-                                </h3>
-                                <div class="product-price">100 ر.س</div>
-                                <p class="product-description">test</p>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
-                                    alt="test">
-                                <button class="add-to-cart">إضافة للسلة</button>
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-title">
-                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
-                                </h3>
-                                <div class="product-price">100 ر.س</div>
-                                <p class="product-description">test</p>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
-                                    alt="test">
-                                <button class="add-to-cart">إضافة للسلة</button>
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-title">
-                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
-                                </h3>
-                                <div class="product-price">100 ر.س</div>
-                                <p class="product-description">test</p>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
-                                    alt="test">
-                                <button class="add-to-cart">إضافة للسلة</button>
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-title">
-                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
-                                </h3>
-                                <div class="product-price">100 ر.س</div>
-                                <p class="product-description">test</p>
-                            </div>
-                        </div>
+                        @endforeach
+                    
 
                     </div>
                 </div>
@@ -248,5 +97,4 @@
     </section>
 
     <!-- Shopping Cart Sidebar -->
-   
 @endsection

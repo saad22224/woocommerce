@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles.css') }}">
     <link rel="shortcut icon" href="{{ asset('assets/logo.jpeg') }}" type="image/x-icon">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -51,7 +51,7 @@
                     </a>
                     <div class="dropdown-content" style="z-index: 1000;">
                         @foreach ($activesection as $section)
-                            <a href="{{ route('section') }}">{{ $section->name }}</a>
+                            <a href="{{ route('section' , $section->name) }}">{{ $section->name }}</a>
                         @endforeach
                     </div>
                 </div>

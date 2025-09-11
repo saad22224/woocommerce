@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\user\HomeController;
 use App\Http\Controllers\user\ProductController;
+use App\Http\Controllers\user\SectionController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
@@ -27,9 +28,42 @@ Route::get('products', [ProductController::class , 'index'])->name('products');
 Route::get('contact', function () {
     return view('contact');
 })->name('contact');
-Route::get('section', function () {
-    return view('section');
-})->name('section');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Route::get('section/{slug}', [SectionController::class , 'index'])->name('section');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Route::get('product_details', function () {
     return view('product-detail');
 })->name('product_details');

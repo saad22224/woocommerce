@@ -58,7 +58,7 @@
                         @foreach ($products as $product)
                             <div class="product-card">
                                 <div class="product-image">
-                                    <img src="{{ $product->image }}" alt="test">
+                                    <img loading="lazy" src="{{ $product->image }}" alt="test">
                                      <button class="add-to-cart" data-id="{{ $product->id }}">إضافة للسلة</button>
                                 </div>
                                 <div class="product-info">
