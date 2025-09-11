@@ -37,7 +37,7 @@
         <div class="nav-container">
             <div class="nav-logo">
                 <a href="{{ route('home') }}">
-                    <img src="{{ asset('assets/logo.jpeg') }}" alt="">
+                    <img loading="lazy" src="{{ asset('assets/logo.jpeg') }}" alt="">
                 </a>
             </div>
 
@@ -49,7 +49,7 @@
     font-size: 12px;"
                             class="fas fa-chevron-down"></i>
                     </a>
-                    <div class="dropdown-content">
+                    <div class="dropdown-content" style="z-index: 1000;">
                         @foreach ($activesection as $section)
                             <a href="{{ route('section') }}">{{ $section->name }}</a>
                         @endforeach
@@ -167,7 +167,7 @@
 
                 <!-- About -->
                 <div class="footer-section about">
-                    <img style="
+                    <img loading="lazy" style="
                         height: 90px; /* ارتفاع ثابت */
     width: auto; /* يحافظ على النسبة */
     object-fit: contain; /* يضمن أن الصورة لا تتمدد أو تتقطع */
@@ -222,11 +222,11 @@
                 <div class="footer-section payment">
                     <h4>طرق الدفع</h4>
                     <div class="payment-icons">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" alt="Visa">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/MasterCard_Logo.svg"
+                        <img  loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" alt="Visa">
+                        <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/b/b7/MasterCard_Logo.svg"
                             alt="MasterCard">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"
+                        <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal">
+                        <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"
                             alt="Apple Pay">
                     </div>
                     <p class="secure-pay">🔒 الدفع آمن 100% عبر بروتوكولات مشفرة</p>
@@ -241,10 +241,10 @@
     </footer>
 
 
-    <script src="{{ asset('script.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ asset('script.js') }}" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {

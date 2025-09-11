@@ -10,7 +10,7 @@
             <button class="hero-btn">تسوق الآن</button>
         </div>
         <div class="hero-image">
-            <img src="https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800"
+            <img loading="lazy" src="https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800"
                 alt="Shopping">
         </div>
     </section>
@@ -21,7 +21,7 @@
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-icon">
-                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        <svg loading="lazy" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <rect x="1" y="3" width="15" height="13" />
                             <polygon points="16,8 20,8 23,11 23,16 16,16 16,8" />
@@ -35,7 +35,7 @@
 
                 <div class="service-card">
                     <div class="service-icon">
-                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        <svg loading="lazy" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polygon
                                 points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2" />
@@ -48,7 +48,7 @@
 
                 <div class="service-card">
                     <div class="service-icon">
-                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        <svg loading="lazy" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M12 2v20" />
                             <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
@@ -62,7 +62,7 @@
         </div>
     </section>
 
-    <style>
+    {{-- <style>
         /* Services Section Styles */
         .services {
             padding: 80px 0;
@@ -436,7 +436,7 @@
                 justify-content: center;
             }
         }
-    </style>
+    </style> --}}
 
     <!-- About Us Section -->
     <!-- About Us Section -->
@@ -485,7 +485,7 @@
                 </div>
                 <div class="about-image">
                     <div class="image-wrapper">
-                        <img src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800"
+                        <img loading="lazy" src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800"
                             alt="فريق العمل">
                     </div>
                 </div>
@@ -506,7 +506,7 @@
                         <div class="swiper-slide">
                             <div class="product-card">
                                 <div class="product-image">
-                                    <img src="{{ $product->image }}" alt="{{ $product->name }}">
+                                    <img loading="lazy" src="{{ $product->image }}" alt="{{ $product->name }}">
                                     <button class="add-to-cart" data-id="{{ $product->id }}">إضافة للسلة</button>
 
                                 </div>
@@ -526,7 +526,7 @@
                                         {{ $truncated }}
                                         @if ($isTruncated)
                                             <a href="#"
-                                                style="margin-left:8px; color:#2563eb; font-weight:500; transition:color 0.2s;"
+                                               
                                                 onmouseover="this.style.color='#1e40af'"
                                                 onmouseout="this.style.color='#2563eb'">
                                                 عرض المزيد
@@ -540,151 +540,7 @@
                             </div>
                         </div>
                     @endforeach
-                    <!-- كرر باقي المنتجات هنا بنفس الشكل -->
-                    {{-- <div class="swiper-slide">
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
-                                    alt="test">
-                                <button class="add-to-cart">إضافة للسلة</button>
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-title">
-                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
-                                </h3>
-                                <div class="product-price">100 ر.س</div>
-                                <p class="product-description">test</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
-                                    alt="test">
-                                <button class="add-to-cart">إضافة للسلة</button>
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-title">
-                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
-                                </h3>
-                                <div class="product-price">100 ر.س</div>
-                                <p class="product-description">test</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
-                                    alt="test">
-                                <button class="add-to-cart">إضافة للسلة</button>
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-title">
-                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
-                                </h3>
-                                <div class="product-price">100 ر.س</div>
-                                <p class="product-description">test</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
-                                    alt="test">
-                                <button class="add-to-cart">إضافة للسلة</button>
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-title">
-                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
-                                </h3>
-                                <div class="product-price">100 ر.س</div>
-                                <p class="product-description">test</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
-                                    alt="test">
-                                <button class="add-to-cart">إضافة للسلة</button>
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-title">
-                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
-                                </h3>
-                                <div class="product-price">100 ر.س</div>
-                                <p class="product-description">test</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
-                                    alt="test">
-                                <button class="add-to-cart">إضافة للسلة</button>
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-title">
-                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
-                                </h3>
-                                <div class="product-price">100 ر.س</div>
-                                <p class="product-description">test</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
-                                    alt="test">
-                                <button class="add-to-cart">إضافة للسلة</button>
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-title">
-                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
-                                </h3>
-                                <div class="product-price">100 ر.س</div>
-                                <p class="product-description">test</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
-                                    alt="test">
-                                <button class="add-to-cart">إضافة للسلة</button>
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-title">
-                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
-                                </h3>
-                                <div class="product-price">100 ر.س</div>
-                                <p class="product-description">test</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400"
-                                    alt="test">
-                                <button class="add-to-cart">إضافة للسلة</button>
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-title">
-                                    <a href="#" style="text-decoration: none; color: inherit;">test</a>
-                                </h3>
-                                <div class="product-price">100 ر.س</div>
-                                <p class="product-description">test</p>
-                            </div>
-                        </div>
-                    </div> --}}
+
 
                 </div>
             </div>
@@ -705,7 +561,7 @@
                         <div class="swiper-slide">
                             <div class="product-card">
                                 <div class="product-image">
-                                    <img src="{{ $product->image }}" alt="{{ $product->name }}">
+                                    <img loading="lazy" src="{{ $product->image }}" alt="{{ $product->name }}">
                                   <button class="add-to-cart" data-id="{{ $product->id }}">إضافة للسلة</button>
                                 </div>
                                 <div class="product-info">
