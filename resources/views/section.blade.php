@@ -65,7 +65,7 @@
                                 </div>
                                 <div class="product-info">
                                     <h3 class="product-title">
-                                        <a href="#"
+                                        <a href="{{ route('product_details'  , ['slug' => $product->name]) }}"
                                             style="text-decoration: none; color: inherit;">{{ $product->name }}</a>
                                     </h3>
                                     <div class="product-price">{{ $product->price }} ر.س</div>
@@ -77,7 +77,7 @@
                                     <p class="product-description">
                                         {{ $truncated }}
                                         @if ($isTruncated)
-                                            <a href="#"
+                                            <a href="{{ route('product_details'  , ['slug' => $product->name]) }}"
                                                 style="margin-left:8px; color:#2563eb; font-weight:500; transition:color 0.2s;"
                                                 onmouseover="this.style.color='#1e40af'"
                                                 onmouseout="this.style.color='#2563eb'">

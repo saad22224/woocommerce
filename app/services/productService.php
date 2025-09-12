@@ -1,4 +1,5 @@
 <?php
+
 namespace App\services;
 
 use App\repository\productRepository;
@@ -15,5 +16,14 @@ class productService
     public function index($request)
     {
         return $this->productRepository->index($request);
+    }
+
+    public function show($slug)
+    {
+        $data =  $this->productRepository->show($slug);
+        if (!$data) {
+            return redirect()->route('home');
+        }
+        return $data;
     }
 }

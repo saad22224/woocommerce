@@ -72,9 +72,22 @@ new #[Layout('components.layouts.auth')] class extends Component {
 
 <div dir="rtl" class="min-h-screen flex items-center justify-center p-6 auth-background">
     <style>
-        /* خلفية ثابتة */
+        /* خلفية وردية متدرجة بدلاً من الخلفية الزرقاء */
         .auth-background {
-            background: #333355;
+            background: linear-gradient(135deg, #ffeef8 0%, #f8f4ff 50%, #fff0f5 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* نقاط ديكورية وردية في الخلفية */
+        .auth-background::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,105,180,0.1)"/><circle cx="80" cy="80" r="3" fill="rgba(255,182,193,0.1)"/><circle cx="40" cy="70" r="1" fill="rgba(255,192,203,0.1)"/><circle cx="60" cy="30" r="1.5" fill="rgba(255,105,180,0.08)"/></svg>');
         }
 
         /* أنيميشن البطاقة */
@@ -89,97 +102,109 @@ new #[Layout('components.layouts.auth')] class extends Component {
             }
         }
 
-        /* أنيميشن الحقول - متحسن */
+        /* أنيميشن الحقول - بألوان وردية */
         @keyframes inputFocus {
             0% { 
-                box-shadow: 0 0 0 rgba(255,255,255,0);
+                box-shadow: 0 0 0 rgba(255,105,180,0);
                 transform: scale(1);
-                border-color: rgba(255,255,255,0.3);
+                border-color: rgba(255,182,193,0.5);
             }
             100% { 
-                box-shadow: 0 0 25px rgba(255,255,255,0.3), 0 0 50px rgba(255,255,255,0.1);
+                box-shadow: 0 0 25px rgba(255,105,180,0.3), 0 0 50px rgba(255,182,193,0.2);
                 transform: scale(1.02);
-                border-color: rgba(255,255,255,0.8);
+                border-color: rgba(255,105,180,0.8);
             }
         }
 
-        /* تأثير الكتابة في الإنبت */
+        /* تأثير الكتابة في الإنبت - وردي */
         @keyframes inputType {
             0% { 
-                box-shadow: inset 0 0 0 rgba(255,255,255,0);
+                box-shadow: inset 0 0 0 rgba(255,105,180,0);
             }
             100% { 
-                box-shadow: inset 0 0 20px rgba(255,255,255,0.1);
+                box-shadow: inset 0 0 20px rgba(255,182,193,0.15);
             }
         }
 
-        /* أنيميشن اللابل */
+        /* أنيميشن اللابل - وردي */
         @keyframes labelFloat {
             0% {
                 transform: translateY(0px);
-                color: rgba(255,255,255,0.7);
+                color: rgba(255,105,180,0.7);
             }
             100% {
                 transform: translateY(-5px);
-                color: rgba(255,255,255,1);
+                color: rgba(255,105,180,1);
             }
         }
 
-        /* أنيميشن النص */
+        /* أنيميشن النص - توهج وردي */
         @keyframes textGlow {
-            0%, 100% { text-shadow: 0 0 5px rgba(51,51,85,0.3); }
-            50% { text-shadow: 0 0 20px rgba(51,51,85,0.6); }
+            0%, 100% { 
+                text-shadow: 0 0 10px rgba(255,105,180,0.3);
+            }
+            50% { 
+                text-shadow: 0 0 20px rgba(255,105,180,0.6), 0 0 30px rgba(255,182,193,0.4);
+            }
         }
 
-        /* أنيميشن الزر */
+        /* أنيميشن الزر - وردي */
         @keyframes buttonPulse {
             0% { 
                 transform: scale(1);
-                box-shadow: 0 4px 15px rgba(51,51,85,0.3);
+                box-shadow: 0 8px 25px rgba(255,105,180,0.4);
             }
             50% { 
                 transform: scale(1.05);
-                box-shadow: 0 8px 25px rgba(51,51,85,0.5);
+                box-shadow: 0 12px 35px rgba(255,105,180,0.6);
             }
             100% { 
                 transform: scale(1);
-                box-shadow: 0 4px 15px rgba(51,51,85,0.3);
+                box-shadow: 0 8px 25px rgba(255,105,180,0.4);
             }
         }
 
         .auth-card {
             animation: fadeUpScale 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,182,193,0.3);
             position: relative;
             overflow: hidden;
+            background: rgba(255, 255, 255, 0.85);
+            box-shadow: 0 20px 60px rgba(255, 182, 193, 0.3);
         }
 
         .auth-input {
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
-            background: rgba(255,255,255,0.1);
-            border: 2px solid rgba(255,255,255,0.3);
+            background: rgba(255, 255, 255, 0.7);
+            border: 2px solid rgba(255,182,193,0.4);
+            color: #555;
+        }
+
+        .auth-input::placeholder {
+            color: rgba(255,105,180,0.6);
         }
 
         .auth-input:focus {
             animation: inputFocus 0.4s ease-out forwards;
+            background: rgba(255, 255, 255, 0.9);
         }
 
         .auth-input:not(:placeholder-shown) {
             animation: inputType 0.3s ease-out forwards;
         }
 
-        /* تأثير خاص للإنبت عند الكتابة */
+        /* تأثير خاص للإنبت عند الكتابة - وردي */
         .auth-input:focus:not(:placeholder-shown) {
             box-shadow: 
-                0 0 25px rgba(255,255,255,0.3), 
-                0 0 50px rgba(255,255,255,0.1),
-                inset 0 0 20px rgba(255,255,255,0.1);
-            border-color: rgba(255,255,255,0.9);
+                0 0 25px rgba(255,105,180,0.3), 
+                0 0 50px rgba(255,182,193,0.2),
+                inset 0 0 20px rgba(255,182,193,0.1);
+            border-color: rgba(255,105,180,0.9);
         }
 
-        /* تأثير الريبل عند الكليك */
+        /* تأثير الريبل عند الكليك - وردي */
         .auth-input::before {
             content: '';
             position: absolute;
@@ -187,7 +212,7 @@ new #[Layout('components.layouts.auth')] class extends Component {
             left: 50%;
             width: 0;
             height: 0;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,182,193,0.2);
             border-radius: 50%;
             transform: translate(-50%, -50%);
             transition: width 0.6s ease, height 0.6s ease;
@@ -202,20 +227,28 @@ new #[Layout('components.layouts.auth')] class extends Component {
 
         .welcome-text {
             animation: textGlow 3s ease-in-out infinite;
+            background: linear-gradient(135deg, #ff69b4, #ff8fa3, #ffb6c1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .auth-button {
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            background: linear-gradient(135deg, #ff69b4, #ffb6c1) !important;
+            border: none !important;
+            box-shadow: 0 8px 25px rgba(255,105,180,0.4);
         }
 
         .auth-button:hover {
             animation: buttonPulse 0.6s ease-in-out;
             transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(255,105,180,0.6) !important;
         }
 
-        /* تأثير الموجة عند الضغط على الزر */
+        /* تأثير الموجة عند الضغط على الزر - وردي */
         .auth-button::before {
             content: '';
             position: absolute;
@@ -234,10 +267,11 @@ new #[Layout('components.layouts.auth')] class extends Component {
             height: 300px;
         }
 
-        /* أنيميشن الروابط */
+        /* أنيميشن الروابط - وردي */
         .auth-link {
             position: relative;
             transition: all 0.3s ease;
+            color: rgba(255,105,180,0.8) !important;
         }
 
         .auth-link::after {
@@ -247,7 +281,7 @@ new #[Layout('components.layouts.auth')] class extends Component {
             left: 0;
             width: 0;
             height: 2px;
-            background: linear-gradient(45deg, #333355, #5a5a7a);
+            background: linear-gradient(45deg, #ff69b4, #ffb6c1);
             transition: width 0.3s ease;
         }
 
@@ -257,6 +291,7 @@ new #[Layout('components.layouts.auth')] class extends Component {
 
         .auth-link:hover {
             transform: translateY(-1px);
+            color: #ff69b4 !important;
         }
 
         /* تأثير الإيموجي المتحرك */
@@ -294,9 +329,9 @@ new #[Layout('components.layouts.auth')] class extends Component {
 
         /* تأثيرات إضافية */
         .glass-effect {
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.1);
             backdrop-filter: blur(15px);
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,182,193,0.2);
         }
 
         /* أنيميشن لودينغ للزر */
@@ -322,6 +357,35 @@ new #[Layout('components.layouts.auth')] class extends Component {
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
+        }
+
+        /* تحسين ألوان النص */
+        .auth-card p {
+            color: rgba(255,105,180,0.8);
+        }
+
+        /* تحسين checkbox */
+        input[type="checkbox"] {
+            accent-color: #ff69b4;
+        }
+
+        /* تأثير تفاعلي إضافي على البطاقة */
+        .auth-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,182,193,0.05), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 6s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
     </style>
 
@@ -385,7 +449,6 @@ new #[Layout('components.layouts.auth')] class extends Component {
                     variant="primary"
                     type="submit"
                     class="w-full py-3 rounded-lg text-white font-semibold auth-button"
-                    style="background: linear-gradient(135deg, #333355, #4a4a6a); border: none;"
                 >
                     تسجيل الدخول
                 </flux:button>
@@ -393,7 +456,7 @@ new #[Layout('components.layouts.auth')] class extends Component {
         </form>
 
         @if (Route::has('register'))
-            <div class="mt-6 text-center text-sm text-gray-200">
+            <div class="mt-6 text-center text-sm text-gray-700">
                 لا تملك حساباً؟
                 <flux:link :href="route('register')" wire:navigate class="text-white font-semibold auth-link">
                     سجّل الآن

@@ -64,9 +64,26 @@ Route::get('section/{slug}', [SectionController::class , 'index'])->name('sectio
 
 
 
-Route::get('product_details', function () {
-    return view('product-detail');
-})->name('product_details');
+Route::get('product_details/{slug}',[ProductController::class , 'showproduct'])->name('product_details');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Route::get('checkout', function () {
     return view('checkout');
 })->name('checkout');

@@ -1,6 +1,7 @@
 @extends('main')
 
 @section('content')
+    {{-- {{ dd($latestproducts) }} --}}
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
@@ -9,7 +10,8 @@
             <button class="hero-btn">تسوق الآن</button>
         </div>
         <div class="hero-image">
-            <img loading="lazy" src="https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800"
+            <img loading="lazy"
+                src="https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800"
                 alt="Shopping">
         </div>
     </section>
@@ -20,8 +22,8 @@
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-icon">
-                        <svg loading="lazy" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg loading="lazy" width="60" height="60" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <rect x="1" y="3" width="15" height="13" />
                             <polygon points="16,8 20,8 23,11 23,16 16,16 16,8" />
                             <circle cx="5.5" cy="18.5" r="2.5" />
@@ -34,8 +36,8 @@
 
                 <div class="service-card">
                     <div class="service-icon">
-                        <svg loading="lazy" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg loading="lazy" width="60" height="60" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polygon
                                 points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2" />
                             <circle cx="12" cy="12" r="3" />
@@ -47,8 +49,8 @@
 
                 <div class="service-card">
                     <div class="service-icon">
-                        <svg loading="lazy" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg loading="lazy" width="60" height="60" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M12 2v20" />
                             <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
                         </svg>
@@ -107,7 +109,8 @@
                 </div>
                 <div class="about-image">
                     <div class="image-wrapper">
-                        <img loading="lazy" src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800"
+                        <img loading="lazy"
+                            src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800"
                             alt="فريق العمل">
                     </div>
                 </div>
@@ -128,13 +131,18 @@
                         <div class="swiper-slide">
                             <div class="product-card">
                                 <div class="product-image">
-                                    <img loading="lazy" src="{{ $product->image }}" alt="{{ $product->name }}">
+                                    @php
+                                        $images = json_decode($product->image, true) ?? [];
+                                    @endphp
+                                 
+                                        <img loading="lazy" src="{{ $images[0] }}" alt="{{ $product->name }}">
+        
                                     <button class="add-to-cart" data-id="{{ $product->id }}">إضافة للسلة</button>
 
                                 </div>
                                 <div class="product-info">
                                     <h3 class="product-title">
-                                        <a href="{{ route('product_details') }}"
+                                        <a href="{{ route('product_details' , ['slug' => $product->name]) }}"
                                             style="text-decoration: none; color: inherit;">{{ $product->name }}</a>
                                     </h3>
                                     <div class="product-price">{{ $product->price }} ر.س</div>
@@ -147,9 +155,7 @@
 
                                         {{ $truncated }}
                                         @if ($isTruncated)
-                                            <a href="#"
-                                               
-                                                onmouseover="this.style.color='#1e40af'"
+                                            <a href="{{ route('product_details' ,  ['slug' => $product->name]) }}" onmouseover="this.style.color='#1e40af'"
                                                 onmouseout="this.style.color='#2563eb'">
                                                 عرض المزيد
                                             </a>
@@ -183,12 +189,16 @@
                         <div class="swiper-slide">
                             <div class="product-card">
                                 <div class="product-image">
-                                    <img loading="lazy" src="{{ $product->image }}" alt="{{ $product->name }}">
-                                  <button class="add-to-cart" data-id="{{ $product->id }}">إضافة للسلة</button>
+                                    @php
+                                        $images = json_decode($product->image, true) ?? [];
+                                    @endphp
+                                 
+                                        <img loading="lazy" src="{{ $images[0] }}" alt="{{ $product->name }}">
+                                    <button class="add-to-cart" data-id="{{ $product->id }}">إضافة للسلة</button>
                                 </div>
                                 <div class="product-info">
                                     <h3 class="product-title">
-                                        <a href="{{ route('product_details') }}"
+                                        <a href="{{ route('product_details'  , ['slug' => $product->name]) }}"
                                             style="text-decoration: none; color: inherit;">{{ $product->name }}</a>
                                     </h3>
                                     <div class="product-price">{{ $product->price }} ر.س</div>
@@ -201,7 +211,7 @@
 
                                         {{ $truncated }}
                                         @if ($isTruncated)
-                                            <a href="#"
+                                            <a href="{{ route('product_details'  , ['slug' => $product->name]) }}"
                                                 style="margin-left:8px; color:#2563eb; font-weight:500; transition:color 0.2s;"
                                                 onmouseover="this.style.color='#1e40af'"
                                                 onmouseout="this.style.color='#2563eb'">

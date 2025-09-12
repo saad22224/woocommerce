@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
             $table->decimal('price' , 10 , 2);
-            $table->string('image');
+            $table->json('image');
             $table->boolean('is_best_seller')->default(0);
             $table->timestamps();
         });

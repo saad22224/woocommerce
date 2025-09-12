@@ -367,7 +367,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const cartCount = document.getElementById('cart-count');
 
     document.addEventListener('click', function(e) {
-        if (e.target.classList.contains('add-to-cart')) {
+        if (e.target.classList.contains('add-to-cart') || e.target.classList.contains('add-to-cart-btn')) {
             const productId = e.target.getAttribute('data-id');
 
             fetch('/cart/add', {

@@ -1,45 +1,56 @@
 @extends('main')
 @section('content')
+
+@php
+    $images = json_decode($product->image, true) ?? [];
+@endphp
     <!-- Product Detail -->
     <section class="product-detail">
         <div class="container">
             <div class="product-detail-wrapper">
                 <div class="product-images">
                     <div class="main-image">
-                        <img id="main-product-image" src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Product">
+                        <img loading="lazy" id="main-product-image" src="{{ $images[0] }}" alt="Product">
                     </div>
                     <div class="image-thumbnails">
-                        <img class="thumbnail active" src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Image 1">
-                        <img class="thumbnail" src="https://images.pexels.com/photos/1649771/pexels-photo-1649771.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Image 2">
-                        <img class="thumbnail" src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Image 3">
+
+                        @foreach ($images as $img)
+                            
+                     
+                        <img loading="lazy" class="thumbnail active" 
+                        src="{{ $img }}" alt="Image 1">
+
+                           @endforeach
+                        {{-- <img loading="lazy" class="thumbnail" src="https://images.pexels.com/photos/1649771/pexels-photo-1649771.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Image 2">
+                        <img loading="lazy" class="thumbnail" src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Image 3"> --}}
                     </div>
                 </div>
 
                 <div class="product-info">
-                    <h1 id="product-title">هاتف ذكي فائق الجودة</h1>
+                    <h1 id="product-title">{{ $product->name }}</h1>
                     {{-- <div class="product-rating">
                         <div class="stars">⭐⭐⭐⭐⭐</div>
                         <span>(128 تقييم)</span>
                     </div> --}}
                     
                     <div class="product-price">
-                        <span class="current-price" id="product-price">1,299 ر.س</span>
+                        <span class="current-price" id="product-price">{{ $product->price }} ر.س</span>
                         {{-- <span class="old-price">1,499 ر.س</span> --}}
                         {{-- <span class="discount">وفر 200 ر.س</span> --}}
                     </div>
 
                     <div class="product-description" id="product-description">
                         <h3>وصف المنتج</h3>
-                        <p>هاتف ذكي بتقنيات متطورة وكاميرا عالية الدقة. يتميز بشاشة عرض رائعة وبطارية تدوم طويلاً. مثالي للاستخدام اليومي والتصوير.</p>
+                        <p> {{ $product->description }}</p>
                         
-                        <h4>المواصفات:</h4>
+                        {{-- <h4>المواصفات:</h4>
                         <ul>
                             <li>شاشة 6.5 بوصة AMOLED</li>
                             <li>كاميرا خلفية ثلاثية 108MP</li>
                             <li>ذاكرة 128GB قابلة للتوسع</li>
                             <li>بطارية 5000mAh</li>
                             <li>نظام Android 13</li>
-                        </ul>
+                        </ul> --}}
                     </div>
 
                     {{-- <div class="product-options">
@@ -64,7 +75,7 @@
                     </div> --}}
 
                     <div class="product-actions">
-                        <button class="add-to-cart-btn" id="add-to-cart-detail">إضافة للسلة</button>
+                        <button class="add-to-cart-btn"  id="add-to-cart-detail" data-id="{{ $product->id }}">إضافة للسلة</button>
                         {{-- <button class="buy-now-btn">اشتري الآن</button> --}}
                         {{-- <button class="wishlist-btn">❤️</button> --}}
                     </div>
@@ -106,7 +117,7 @@
                             </div>
                             <div class="product-info">
                                 <h3 class="product-title">
-                                    <a href="{{ route('product_details') }}" style="text-decoration: none; color: inherit;">test</a>
+                                    <a href="{{ route('product_details'  , ['slug' => $product->name]) }}" style="text-decoration: none; color: inherit;">test</a>
                                 </h3>
                                 <div class="product-price">100 ر.س</div>
                                 <p class="product-description">test</p>

@@ -28,4 +28,11 @@ class productRepository
             'activesection' => $activesection
         ];
     }
+
+
+    public function show($slug)
+    {
+        $product = Product::where('name', $slug)->firstOrFail();
+        return $product;
+    }
 }

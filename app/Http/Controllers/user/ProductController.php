@@ -28,4 +28,10 @@ class ProductController extends Controller
 
         return view('products', $data);
     }
+
+    public function showproduct($slug)
+    {
+        $product = $this->productService->show($slug);
+        return view('product-detail', compact('product'));
+    }
 }
